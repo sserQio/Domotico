@@ -7,10 +7,10 @@
 class System{
     private:
         // Limite della rete elettrica (non considerando l'impianto fotovoltaico)
-        const int system_limit;
+        const int system_limit = 3500;
 
         // Produzione elettrica dell'impianto fotovoltaico
-        int pv_production;
+        int pv_production = 0;
 
     public:
         // Limite totale del sistema (rete elettrica + impianto fotovoltaico)

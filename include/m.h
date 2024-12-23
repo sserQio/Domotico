@@ -3,7 +3,7 @@
 
 #include "./device.h"
 
-class M{
+class M : public Device{
     private:
         // Orario di inizio esecuzione del dispositivo
         Time start;
@@ -13,16 +13,16 @@ class M{
 
     public:
         // Override della funzione set
-        void set(std::string device_name, std::string command);
+        void set(std::string device_name, std::string command) override;
 
         // Override della funzione set
-        void set(std::string device_name, std::string start, std::string stop);
+        void set(std::string device_name, std::string start, std::string stop) override;
 
         // Override della funzione remove
-        void rm(std::string device_name);
+        void rm(std::string device_name) override;
 
         // Override della funzione reset_timers
-        void reset_timers();
+        void reset_timers() override;
 };
 
 #endif // M_H

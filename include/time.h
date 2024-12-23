@@ -9,6 +9,9 @@ class Time{
         int minutes;
 
     public:
+        // Costruttore. Il parametro passato è una stringa che indica l'ora in formato hh:mm
+        Time(std::string t);
+
         // Stampa l'orario corrente
         void print_time();
 
