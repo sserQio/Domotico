@@ -16,3 +16,9 @@ void Time::change_time(std::string h, std::string m){
     hours = std::stoi(h);
     minutes = std::stoi(m);
 }
+
+void Time::set_time(std::string time){
+    std::string hours = time.substr(0, 2);
+    std::string minutes = time.substr(3, 2);
+    change_time(hours, minutes); 
+}

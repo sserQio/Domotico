@@ -26,16 +26,16 @@ class Device{
         Device(std::string n, int i, double c);
         
         // Funzione per accendere e spegnere un dispositivo
-        virtual void set(std::string device_name, std::string command);
+        virtual void set(std::string command);
 
         // Funzione per impostare specifici orari di accensione e spegnimento del dispositivo
-        virtual void set(std::string device_name, std::string start, std::string stop);
+        virtual void set(std::string start, std::string stop);
 
         // auto-start si azzera
-        virtual void rm(std::string device_name);
+        virtual void rm();
 
-        // Mostra a schermo produzione/consumo energetico di un dispositivo specificato
-        void show(std::string device_name);
+        // Mostra a schermo produzione/consumo energetico di un dispositivo specifico
+        void show();
 
         // Rimuove il timer di tutti i dispositivi. I dispositivi rimangono nello stato attuale
         virtual void reset_timers();

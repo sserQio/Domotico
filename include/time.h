@@ -17,6 +17,9 @@ class Time{
 
         // Modifica l'orario con uno a scelta
         void change_time(std::string h, std::string m);
+
+        // Imposta orario dato l'orario come stringa unica
+        void Time::set_time(std::string time);
 };
 
 #endif // TIME_H

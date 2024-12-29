@@ -13,13 +13,13 @@ class M : public Device{
 
     public:
         // Override della funzione set
-        void set(std::string device_name, std::string command) override;
+        void set(std::string command) override;
 
         // Override della funzione set
-        void set(std::string device_name, std::string start, std::string stop) override;
+        void set(std::string start, std::string stop) override;
 
         // Override della funzione remove
-        void rm(std::string device_name) override;
+        void rm() override;
 
         // Override della funzione reset_timers
         void reset_timers() override;
