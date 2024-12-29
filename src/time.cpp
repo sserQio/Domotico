@@ -1,5 +1,10 @@
 #include "../include/time.h"
 
+Time::Time(){
+    hours = 0;
+    minutes = 0;
+}
+
 Time::Time(std::string t){
     // Inizializza le variabili hours e minutes con i valori contenuti nella stringa t
     hours = std::stoi(t.substr(0, 2));

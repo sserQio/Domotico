@@ -13,17 +13,19 @@ class Device{
         int id;
 
         // Consumo del dispositivo
-        double consumption;
-
-        // Orario di inizio di esecuzione automatico di un dispositivo
-        Time autoStart;
+        int consumption;
 
         // Varibile che definisce l'accensione o meno di un dispositivo
         bool is_on;
 
+    protected:
+        // Orario di inizio di esecuzione automatico di un dispositivo
+        // Questo parametro è comune a tutti i dispositivi, indipendentemente da M o CP
+        Time autoStart;
+
     public:
         // Costruttore
-        Device(std::string n, int i, double c);
+        Device(std::string n, int i, int c);
         
         // Funzione per accendere e spegnere un dispositivo
         virtual void set(std::string command);
@@ -38,13 +40,17 @@ class Device{
         void show();
 
         // Rimuove il timer di tutti i dispositivi. I dispositivi rimangono nello stato attuale
-        virtual void reset_timers();
+        virtual void reset_timer() = 0;
 
         // Disabilita il costruttore di copia
-        Device::Device(const Device&) = delete;
+        Device(const Device&) = delete;
 
         // Disabilita l'operatore di assegnamento
-        Device& Device::operator=(const Device&) = delete;
+        Device& operator=(const Device&) = delete;
+
+        // FUNZIONE PROVVISORIA
+        // Stampa tutte le variabili di un oggetto
+        void print();
 };
 
 #endif // DEVICE_H

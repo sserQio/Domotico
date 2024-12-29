@@ -6,12 +6,15 @@
 class M : public Device{
     private:
         // Orario di inizio esecuzione del dispositivo
-        Time start;
+        // Time start;
 
         // Orario di fine esecuzione del dispositivo
         Time stop;
 
     public:
+        // Costruttore
+        M(std::string n, int i, int c);
+        
         // Override della funzione set
         void set(std::string command) override;
 
@@ -21,8 +24,8 @@ class M : public Device{
         // Override della funzione remove
         void rm() override;
 
-        // Override della funzione reset_timers
-        void reset_timers() override;
+        // Override della funzione reset_timer
+        void reset_timer() override;
 };
 
 #endif // M_H

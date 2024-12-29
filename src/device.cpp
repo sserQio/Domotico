@@ -1,6 +1,6 @@
 #include "../include/device.h"
 
-Device::Device(std::string n, int i, double c):
+Device::Device(std::string n, int i, int c):
     name {n},
     id {i},
     consumption {c},
@@ -13,6 +13,7 @@ void Device::set(std::string command){
         is_on = true;
     } else {
         is_on = false;
+        autoStart.set_time("00:00");
     }
 }
 
@@ -29,3 +30,7 @@ void Device::show(){
     else std::cout << name << " consuma: " << consumption << std::endl;
 }
 
+void Device::print(){
+    std::cout << "Nome: " << name << ", id: " << id << ", consumption: " << consumption << ", is_on " << is_on << ", ";
+    autoStart.print_time();
+}

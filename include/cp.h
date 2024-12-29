@@ -23,7 +23,7 @@ class CP : public Device{
         void rm() override;
 
         // Override della funzione reset_timers
-        void reset_timers() override;
+        void reset_timer() override;
 
         // Impostiamo manual_stop = true e anche auto_start = 0
         void manual_reset();
