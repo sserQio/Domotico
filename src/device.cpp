@@ -35,3 +35,19 @@ void Device::print(){
     std::cout << "Nome: " << name << ", id: " << id << ", consumption: " << consumption << ", is_on " << is_on << ", ";
     autoStart.print_time();
 }
+
+std::string Device::get_name(){
+    return name;
+}
+
+int Device::get_consumption(){
+    return consumption;
+}
+
+bool Device::get_is_on(){
+    return is_on;
+}
+
+Time Device::get_autoStart(){
+    return autoStart;
+}

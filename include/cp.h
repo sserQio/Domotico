@@ -12,7 +12,7 @@ class CP : public Device{
 
         // Richiesta di spegnimento manuale. Sempre false, ma se user vuole terminare l'esecuzione 
         // del dispositivo diventa true. auto-start (timer) si azzera ma il dispositivo rimane acceso
-        bool manual_stop;
+        // bool manual_stop;
 
     public:
         CP(std:: string n, int i, int c, Time cd);
@@ -30,7 +30,7 @@ class CP : public Device{
         //void reset_timer() override;
 
         // Impostiamo manual_stop = true e anche auto_start = 0
-        //void manual_reset();
+        // void manual_reset();
 
         
 };

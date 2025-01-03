@@ -52,6 +52,18 @@ class Device{
         // FUNZIONE PROVVISORIA
         // Stampa tutte le variabili di un oggetto
         void print();
+
+        // Ritorna il nome del dispostivo
+        std::string get_name();
+
+        // Ritorna il valore di consumo del dispositivo
+        int get_consumption();
+
+        // Ritorna lo stato di accensione del dispositivo
+        bool get_is_on();
+
+        // Ritorna il valore di auto_start
+        Time get_autoStart();
 };
 
 #endif // DEVICE_H

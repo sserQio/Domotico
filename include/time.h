@@ -28,11 +28,20 @@ class Time{
         // Imposta orario dato l'orario come stringa unica
         void set_time(std::string time);
 
-        //overloading dell'operatore + 
-        // pensare se mettere const prima del tipo ritornato Time
+        // Ritorna il numero di ore
+        int get_hours();
+
+        // Ritorna il numero di minuti
+        int get_minutes(); 
+
+        // Overloading dell'operatore + 
+        // Pensare se mettere const prima del tipo ritornato Time
         Time operator+(const Time& t) const;
 
-        //overloading dell'operatore >
+        // Overloading dell'operatore -
+        Time operator-(const Time& t) const;
+
+        // Overloading dell'operatore >
         bool operator>(const Time& t) const;
 };
 

@@ -32,7 +32,7 @@ class System{
 
         // Mostra la lista di tutti i dispositivi (attivi e inattivi) con la produzione/consumo
         // energetico di ciascuno dalle 00:00 al momento di invio del comando. Inoltre
-        //mostra la produzione/consumo energetico totale del sistema dalle 00:00 al momento
+        // mostra la produzione/consumo energetico totale del sistema dalle 00:00 al momento
         // di invio del comando
         void show();
     
