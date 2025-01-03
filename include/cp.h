@@ -2,8 +2,10 @@
 #define CP_H
 
 #include "./device.h"
+#include "../include/system.h"
 
 class CP : public Device{
+
     private:
         // Durata del ciclo di accensione del dispostivo
         Time cycle_duration;
@@ -12,6 +14,8 @@ class CP : public Device{
         // del dispositivo diventa true. auto-start (timer) si azzera ma il dispositivo rimane acceso
         bool manual_stop;
 
+    public:
+        CP(std:: string n, int i, int c, Time cd);
         // Override della funzione set
         void set(std::string command) override;
 
@@ -23,10 +27,10 @@ class CP : public Device{
         void rm() override;
 
         // Override della funzione reset_timers
-        void reset_timer() override;
+        //void reset_timer() override;
 
         // Impostiamo manual_stop = true e anche auto_start = 0
-        void manual_reset();
+        //void manual_reset();
 
         
 };

@@ -4,7 +4,10 @@ Time::Time(){
     hours = 0;
     minutes = 0;
 }
-
+Time ::Time(int h, int m){
+    hours=h;
+    minutes=m;
+}
 Time::Time(std::string t){
     // Inizializza le variabili hours e minutes con i valori contenuti nella stringa t
     hours = std::stoi(t.substr(0, 2));
@@ -26,4 +29,26 @@ void Time::set_time(std::string time){
     std::string hours = time.substr(0, 2);
     std::string minutes = time.substr(3, 2);
     change_time(hours, minutes); 
+}
+Time Time :: operator+(const Time& t) const {
+    int tot_min = this ->minutes + t.minutes;
+    int tot_hours = this ->hours + t.hours;
+
+    //nel caso in cui la somma dei minuti sia superiore a 60, calcoliamo 
+    //quante ore ci sono in quei minuti e le aggiungiamo al conteggio delle ore
+    tot_hours += tot_min/60;
+
+    //gestiamo il ciclo 24h
+    tot_hours%=24;
+
+    //data la somma dei minuti, i soli minuti sono il resto della divisione per 60
+    tot_min = tot_min%60;
+
+    return Time(tot_hours, tot_min);
+}
+
+bool Time:: operator>(const Time& t) const{
+    if(this -> hours > t.hours) return true;
+    if((this -> hours == t.hours) && (this -> minutes > t.minutes)) return true;
+    return false;
 }

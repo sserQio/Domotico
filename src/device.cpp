@@ -1,5 +1,6 @@
 #include "../include/device.h"
 
+
 Device::Device(std::string n, int i, int c):
     name {n},
     id {i},

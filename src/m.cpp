@@ -21,7 +21,9 @@ void M::rm(){
     stop.set_time("00:00");
 }
 
-void M::reset_timer(){
+//pensare se serve o meno perche uguale a rm()
+/*void M::reset_timer(){
     autoStart.set_time("00:00");
     stop.set_time("00:00");
 }
+*/

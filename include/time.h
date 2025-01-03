@@ -12,6 +12,9 @@ class Time{
         // Costruttore di default
         Time();
 
+        //Costruttore che accetta due int
+        Time(int h, int m);
+
         // Costruttore. Il parametro passato è una stringa che indica l'ora in formato hh:mm
         Time(std::string t);
 
@@ -24,6 +27,13 @@ class Time{
 
         // Imposta orario dato l'orario come stringa unica
         void set_time(std::string time);
+
+        //overloading dell'operatore + 
+        // pensare se mettere const prima del tipo ritornato Time
+        Time operator+(const Time& t) const;
+
+        //overloading dell'operatore >
+        bool operator>(const Time& t) const;
 };
 
 #endif // TIME_H

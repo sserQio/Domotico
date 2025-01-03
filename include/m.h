@@ -25,7 +25,7 @@ class M : public Device{
         void rm() override;
 
         // Override della funzione reset_timer
-        void reset_timer() override;
+        //void reset_timer() override;
 };
 
 #endif // M_H

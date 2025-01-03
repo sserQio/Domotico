@@ -3,6 +3,7 @@
 
 #include "./time.h"
 #include <vector>
+#include "../include/system.h"
 
 class Device{
     private:
@@ -40,7 +41,7 @@ class Device{
         void show();
 
         // Rimuove il timer di tutti i dispositivi. I dispositivi rimangono nello stato attuale
-        virtual void reset_timer() = 0;
+        // virtual void reset_timer() = 0;
 
         // Disabilita il costruttore di copia
         Device(const Device&) = delete;
