@@ -48,3 +48,23 @@ void System::show(){
 
     std::cout << "Attualmente il sistema ha prodotto " << XX << " kWh e consumato " << YY << " kWh." << std::endl;
 }
+
+void System::set_time(std::string time){
+    std::cout << "Salto all'ora scelta: " + time << std::endl;
+}
+
+void System::reset_time(){
+    current_time.set_time("00:00");
+    for (int i = 0; i < m_devices.size(); i++){
+        if (m_devices[i].get_is_on() == true) m_devices[i].rm();
+        if (cp_devices[i].get_is_on() == true) cp_devices[i].rm();
+    }
+}
+
+void System::reset_all(){
+    current_time.set_time("00:00");
+    for (int i = 0; i < m_devices.size(); i++){
+        if (m_devices[i].get_is_on() == true) m_devices[i].set("off");
+        if (cp_devices[i].get_is_on() == true) cp_devices[i].set("off");
+    }
+}

@@ -35,7 +35,7 @@ class System{
         // mostra la produzione/consumo energetico totale del sistema dalle 00:00 al momento
         // di invio del comando
         void show();
-    
+
         // Salta a una specifica ora del giorno
         void set_time(std::string time);
 

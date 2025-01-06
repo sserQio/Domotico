@@ -2,7 +2,7 @@
 
 CP::CP(std:: string n, int i, int c, Time cd): Device(n, i, c){
 
-    // Cycle duration e cd puntano alla stessa area di memoria
+    // cycle_duration e cd puntano alla stessa area di memoria
     cycle_duration = cd;
     // manual_stop = false;
 }
@@ -29,4 +29,6 @@ void CP::reset_timer(){
 }
 */
 
-
+Time CP::get_duration(){
+    return cycle_duration;
+}

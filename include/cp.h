@@ -32,6 +32,7 @@ class CP : public Device{
         // Impostiamo manual_stop = true e anche auto_start = 0
         // void manual_reset();
 
-        
+        // Ritorna la durata del ciclo di esecuzione del dispositivo
+        Time get_duration();
 };
 #endif // CP_H

@@ -27,3 +27,7 @@ void M::rm(){
     stop.set_time("00:00");
 }
 */
+
+Time M::get_stop(){
+    return stop;
+}

@@ -15,8 +15,8 @@ Time::Time(std::string t){
 }
 
 void Time::print_time(){
-    // Stampa l'ora
-    std::cout << "Orario corrente: " << hours << ":" << minutes << std::endl;
+    // Stampa l'ora corrente
+    std::cout << "[" << hours << ":" << minutes << "] " << std::endl;
 }
 
 void Time::change_time(std::string h, std::string m){

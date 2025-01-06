@@ -26,6 +26,9 @@ class M : public Device{
 
         // Override della funzione reset_timer
         //void reset_timer() override;
+
+        // Ritorna l'ora di spegnimento
+        Time get_stop();
 };
 
 #endif // M_H
