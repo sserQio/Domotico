@@ -9,6 +9,27 @@ Device::Device(std::string n, int i, int c):
     is_on {false}
 {}
 
+// Costruttore di copia
+Device::Device(const Device& other) :
+    name {other.name},
+    id {other.id},
+    consumption {other.consumption},
+    autoStart {other.autoStart},
+    is_on {other.is_on}
+{}
+
+// Operatore di assegnazione di copia
+Device& Device::operator=(const Device& other) {
+    if (this != &other) {
+        name = other.name;
+        id = other.id;
+        consumption = other.consumption;
+        autoStart = other.autoStart;
+        is_on = other.is_on;
+    }
+    return *this;
+}
+
 void Device::set(std::string command){
     if (command == "on"){
         is_on = true;

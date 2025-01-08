@@ -43,6 +43,15 @@ class Time{
 
         // Overloading dell'operatore >
         bool operator>(const Time& t) const;
+
+        // Overloading dell'operatore <
+        bool operator<(const Time& t) const;
+
+        // Overloading dell'operatore !=
+        bool operator!=(const Time& t) const;
+
+        // Overloading dell'operatore <=
+        bool operator<=(const Time& t) const;
 };
 
 #endif // TIME_H

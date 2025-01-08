@@ -4,6 +4,17 @@ M::M(std::string n, int i, int c) : Device(n, i, c){
     stop.set_time("00:00");
 }
 
+M::M(const M& other) : Device(other), stop(other.stop) {
+}
+
+M& M::operator=(const M& other) {
+    if (this != &other) {
+        Device::operator=(other);
+        stop = other.stop;
+    }
+    return *this;
+}
+
 void M::set(std::string command){
     Device::set(command);
     if (command == "off"){

@@ -78,3 +78,20 @@ bool Time::operator>(const Time& t) const{
     if((this -> hours == t.hours) && (this -> minutes > t.minutes)) return true;
     return false;
 }
+
+bool Time::operator<(const Time& t) const{
+    if(this -> hours < t.hours) return true;
+    if((this -> hours == t.hours) && (this -> minutes < t.minutes)) return true;
+    return false;
+}
+
+bool Time::operator!=(const Time& t) const{
+    if (hours != t.hours || minutes != t.minutes) return true;
+    else return false;
+}
+
+bool Time::operator<=(const Time& t) const{
+    if(this -> hours <= t.hours) return true;
+    if((this -> hours == t.hours) && (this -> minutes <= t.minutes)) return true;
+    return false;
+}

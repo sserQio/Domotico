@@ -21,10 +21,13 @@ class System{
         // Limite totale del sistema (rete elettrica + impianto fotovoltaico)
         int system_capacity;
 
-        // Vector dei dispositivi cp 
-        std::vector<Device> cp_devices;
-        // Vector dei dispositivi m
-        std::vector<Device> m_devices;
+        // Vettore di puntatori alla classe base Device
+        std::vector<Device> devices;
+
+        // Vector dei dispositivi CP 
+        std::vector<CP> cp_devices;
+        // Vector dei dispositivi M
+        std::vector<M> m_devices;
 
         // Funzione per cercare un dispositivo nel sistema
         M* search_m_device(std::string device_name);
@@ -47,6 +50,15 @@ class System{
         // - Timer rimossi
         // - Dispositivi spenti
         void reset_all();
+
+        // Algoritmo per ordinare in ordine crescente gli oggetti devices accesi in base al parametro autostart
+        void devices_sorting_on();
+
+        // Algoritmo per ordinare in ordine crescente gli oggetti devices in base all'orario di spegnimento
+        void devices_sorting_off(std::vector<Device>& v);
+
+        // Algoritmo per ordinare in ordine crescente gli oggetti device spenti
+        bool compare_devices(Device* a, Device* b);
 };
 
 #endif // SYSTEM_H

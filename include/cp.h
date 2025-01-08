@@ -16,6 +16,13 @@ class CP : public Device{
 
     public:
         CP(std:: string n, int i, int c, Time cd);
+
+        // Costruttore di copia
+        CP(const CP& other);
+
+        // Operatore di assegnazione di copia
+        CP& operator=(const CP& other);
+        
         // Override della funzione set
         void set(std::string command) override;
 

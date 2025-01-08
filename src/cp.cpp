@@ -1,15 +1,25 @@
 #include "../include/cp.h"
 
 CP::CP(std:: string n, int i, int c, Time cd): Device(n, i, c){
-
     // cycle_duration e cd puntano alla stessa area di memoria
     cycle_duration = cd;
     // manual_stop = false;
 }
 
+CP::CP(const CP& other) : Device(other), cycle_duration(other.cycle_duration) {
+}
+
+CP& CP::operator=(const CP& other) {
+    if (this != &other) {
+        Device::operator=(other);
+        cycle_duration = other.cycle_duration;
+    }
+    return *this;
+}
+
 void CP::set(std::string command){
     Device::set(command);
-    // Se (autostrat + cycle duraion) > current_time allora: 
+    // Se (autostart + cycle duraion) > current_time allora: 
     // manual stop = true
 }
 

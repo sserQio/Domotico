@@ -27,6 +27,12 @@ class Device{
     public:
         // Costruttore
         Device(std::string n, int i, int c);
+
+        // Costruttore di copia
+        Device(const Device& other);
+
+        // Operatore di assegnazione di copia
+        Device& operator=(const Device& other);
         
         // Funzione per accendere e spegnere un dispositivo
         virtual void set(std::string command);

@@ -14,6 +14,12 @@ class M : public Device{
     public:
         // Costruttore
         M(std::string n, int i, int c);
+
+        // Costruttore di copia
+        M(const M& other);
+
+        // Operatore di assegnazione di copia
+        M& operator=(const M& other);
         
         // Override della funzione set
         void set(std::string command) override;
