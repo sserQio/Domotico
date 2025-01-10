@@ -1,9 +1,11 @@
 #ifndef DEVICE_H
 #define DEVICE_H
 
-#include "./stime.h"
+#include <iostream>
+#include <string>
 #include <vector>
-#include "../include/system.h"
+#include "../include/stime.h"
+// #include "../include/system.h"
 
 class Device{
     private:
@@ -50,10 +52,10 @@ class Device{
         // virtual void reset_timer() = 0;
 
         // Disabilita il costruttore di copia
-        Device(const Device&) = delete;
+        // Device(const Device&) = delete;
 
         // Disabilita l'operatore di assegnamento
-        Device& operator=(const Device&) = delete;
+        // Device& operator=(const Device&) = delete;
 
         // FUNZIONE PROVVISORIA
         // Stampa tutte le variabili di un oggetto

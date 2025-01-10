@@ -1,10 +1,10 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-#include "./device.h"
-#include "./stime.h"
-#include "./m.h"
-#include "./cp.h"
+#include "../include/device.h"
+#include "../include/stime.h"
+#include "../include/m.h"
+#include "../include/cp.h"
 
 class System{
     private:

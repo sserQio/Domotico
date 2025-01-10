@@ -2,6 +2,7 @@
 #define STIME_H
 
 #include <iostream>
+#include <string>
 
 class Stime{
     private:

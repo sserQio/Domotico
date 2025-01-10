@@ -1,8 +1,8 @@
 #ifndef CP_H
 #define CP_H
 
-#include "./device.h"
-#include "../include/system.h"
+#include "../include/device.h"
+// #include "../include/system.h"
 
 class CP : public Device{
 

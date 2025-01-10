@@ -3,6 +3,7 @@
 #include "../include/cp.h"
 
 int main() {
+    /*
     M pv("Impianto Fotovoltaico", 0, 1500);
     Stime t_w_m(1,50);
     CP washing_machine("Lavatrice", 1, -2000, t_w_m);
@@ -27,5 +28,6 @@ int main() {
     std::cout << "Spegniamo l'impianto fotovoltaico" << std::endl;
     pv.set("off");
     pv.print();
+    */
     return 0;
 }

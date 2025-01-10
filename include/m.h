@@ -1,13 +1,10 @@
 #ifndef M_H
 #define M_H
 
-#include "./device.h"
+#include "../include/device.h"
 
 class M : public Device{
     private:
-        // Orario di inizio esecuzione del dispositivo
-        // Stime start;
-
         // Orario di fine esecuzione del dispositivo
         Stime stop;
 
@@ -22,13 +19,13 @@ class M : public Device{
         M& operator=(const M& other);
         
         // Override della funzione set
-        void set(std::string command) override;
+        void set(std::string command); // tolto override
 
         // Override della funzione set
-        void set(std::string start, std::string stop) override;
+        void set(std::string start, std::string stop); // tolto override
 
         // Override della funzione remove
-        void rm() override;
+        void rm(); // tolto override
 
         // Override della funzione reset_timer
         //void reset_timer() override;

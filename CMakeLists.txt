@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.7)
 
 set (CMAKE_CXX_STANDARD 11)
 
-project (Domotico VERSION 0.1)
+project (Domotico VERSION 1.0)
 
 include_directories(include)
 
@@ -11,12 +11,12 @@ add_library(Domotico
     include/device.h
     include/m.h
     include/system.h
-    include/time.h
+    include/stime.h
     src/cp.cpp
     src/device.cpp
     src/m.cpp
     src/system.cpp
-    src/time.cpp
+    src/stime.cpp
 )
 
 add_executable(main
@@ -24,5 +24,5 @@ add_executable(main
 )
 
 target_link_libraries(main
-    mainb
+    Domotico
 )
