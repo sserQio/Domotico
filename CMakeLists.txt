@@ -12,7 +12,10 @@ add_library(Domotico
     include/m.h
     include/system.h
     include/time.h
+    src/cp.cpp
     src/device.cpp
+    src/m.cpp
+    src/system.cpp
     src/time.cpp
 )
 
