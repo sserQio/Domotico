@@ -1,22 +1,22 @@
-#ifndef TIME_H
-#define TIME_H
+#ifndef STIME_H
+#define STIME_H
 
 #include <iostream>
 
-class Time{
+class Stime{
     private:
         int hours;
         int minutes;
 
     public:
         // Costruttore di default
-        Time();
+        Stime();
 
         //Costruttore che accetta due int
-        Time(int h, int m);
+        Stime(int h, int m);
 
         // Costruttore. Il parametro passato è una stringa che indica l'ora in formato hh:mm
-        Time(std::string t);
+        Stime(std::string t);
 
         // Stampa l'orario corrente
         // PROBLEMA: L'ora viene scritta come 0:0 e non 00:00
@@ -35,23 +35,23 @@ class Time{
         int get_minutes(); 
 
         // Overloading dell'operatore + 
-        // Pensare se mettere const prima del tipo ritornato Time
-        Time operator+(const Time& t) const;
+        // Pensare se mettere const prima del tipo ritornato Stime
+        Stime operator+(const Stime& t) const;
 
         // Overloading dell'operatore -
-        Time operator-(const Time& t) const;
+        Stime operator-(const Stime& t) const;
 
         // Overloading dell'operatore >
-        bool operator>(const Time& t) const;
+        bool operator>(const Stime& t) const;
 
         // Overloading dell'operatore <
-        bool operator<(const Time& t) const;
+        bool operator<(const Stime& t) const;
 
         // Overloading dell'operatore !=
-        bool operator!=(const Time& t) const;
+        bool operator!=(const Stime& t) const;
 
         // Overloading dell'operatore <=
-        bool operator<=(const Time& t) const;
+        bool operator<=(const Stime& t) const;
 };
 
-#endif // TIME_H
+#endif // STIME_H

@@ -1,7 +1,7 @@
 #ifndef DEVICE_H
 #define DEVICE_H
 
-#include "./time.h"
+#include "./stime.h"
 #include <vector>
 #include "../include/system.h"
 
@@ -22,7 +22,7 @@ class Device{
     protected:
         // Orario di inizio di esecuzione automatico di un dispositivo
         // Questo parametro è comune a tutti i dispositivi, indipendentemente da M o CP
-        Time autoStart;
+        Stime autoStart;
 
     public:
         // Costruttore
@@ -69,7 +69,7 @@ class Device{
         bool get_is_on();
 
         // Ritorna il valore di auto_start
-        Time get_autoStart();
+        Stime get_autoStart();
 };
 
 #endif // DEVICE_H

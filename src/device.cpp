@@ -69,6 +69,6 @@ bool Device::get_is_on(){
     return is_on;
 }
 
-Time Device::get_autoStart(){
+Stime Device::get_autoStart(){
     return autoStart;
 }

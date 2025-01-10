@@ -8,14 +8,14 @@ class CP : public Device{
 
     private:
         // Durata del ciclo di accensione del dispostivo
-        Time cycle_duration;
+        Stime cycle_duration;
 
         // Richiesta di spegnimento manuale. Sempre false, ma se user vuole terminare l'esecuzione 
         // del dispositivo diventa true. auto-start (timer) si azzera ma il dispositivo rimane acceso
         // bool manual_stop;
 
     public:
-        CP(std:: string n, int i, int c, Time cd);
+        CP(std:: string n, int i, int c, Stime cd);
 
         // Costruttore di copia
         CP(const CP& other);
@@ -40,6 +40,6 @@ class CP : public Device{
         // void manual_reset();
 
         // Ritorna la durata del ciclo di esecuzione del dispositivo
-        Time get_duration();
+        Stime get_duration();
 };
 #endif // CP_H

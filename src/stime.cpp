@@ -1,45 +1,45 @@
-#include "../include/time.h"
+#include "../include/stime.h"
 
-Time::Time(){
+Stime::Stime(){
     hours = 0;
     minutes = 0;
 }
-Time ::Time(int h, int m){
+Stime ::Stime(int h, int m){
     hours=h;
     minutes=m;
 }
-Time::Time(std::string t){
+Stime::Stime(std::string t){
     // Inizializza le variabili hours e minutes con i valori contenuti nella stringa t
     hours = std::stoi(t.substr(0, 2));
     minutes = std::stoi(t.substr(3, 2));
 }
 
-void Time::print_time(){
+void Stime::print_time(){
     // Stampa l'ora corrente
     std::cout << "[" << hours << ":" << minutes << "] " << std::endl;
 }
 
-void Time::change_time(std::string h, std::string m){
+void Stime::change_time(std::string h, std::string m){
     // Modifica l'ora con i valori passati come parametri
     hours = std::stoi(h);
     minutes = std::stoi(m);
 }
 
-void Time::set_time(std::string time){
+void Stime::set_time(std::string time){
     std::string hours = time.substr(0, 2);
     std::string minutes = time.substr(3, 2);
     change_time(hours, minutes); 
 }
 
-int Time::get_hours(){
+int Stime::get_hours(){
     return hours;
 }
 
-int Time::get_minutes(){
+int Stime::get_minutes(){
     return minutes;
 }
 
-Time Time::operator+(const Time& t) const {
+Stime Stime::operator+(const Stime& t) const {
     int tot_min = this->minutes + t.minutes;
     int tot_hours = this->hours + t.hours;
 
@@ -57,10 +57,10 @@ Time Time::operator+(const Time& t) const {
     }
     tot_min = tot_min % 60;
 
-    return Time(tot_hours, tot_min);
+    return Stime(tot_hours, tot_min);
 }
 
-Time Time::operator-(const Time& t) const {
+Stime Stime::operator-(const Stime& t) const {
     int tot_min = this->minutes - t.minutes;
     int tot_hours = this->hours - t.hours;
 
@@ -70,27 +70,27 @@ Time Time::operator-(const Time& t) const {
         tot_min += 60;
         tot_hours--;
     }
-    return Time(tot_hours, tot_min);
+    return Stime(tot_hours, tot_min);
 }
 
-bool Time::operator>(const Time& t) const{
+bool Stime::operator>(const Stime& t) const{
     if(this -> hours > t.hours) return true;
     if((this -> hours == t.hours) && (this -> minutes > t.minutes)) return true;
     return false;
 }
 
-bool Time::operator<(const Time& t) const{
+bool Stime::operator<(const Stime& t) const{
     if(this -> hours < t.hours) return true;
     if((this -> hours == t.hours) && (this -> minutes < t.minutes)) return true;
     return false;
 }
 
-bool Time::operator!=(const Time& t) const{
+bool Stime::operator!=(const Stime& t) const{
     if (hours != t.hours || minutes != t.minutes) return true;
     else return false;
 }
 
-bool Time::operator<=(const Time& t) const{
+bool Stime::operator<=(const Stime& t) const{
     if(this -> hours <= t.hours) return true;
     if((this -> hours == t.hours) && (this -> minutes <= t.minutes)) return true;
     return false;

@@ -2,7 +2,7 @@
 #define SYSTEM_H
 
 #include "./device.h"
-#include "./time.h"
+#include "./stime.h"
 #include "./m.h"
 #include "./cp.h"
 
@@ -16,7 +16,7 @@ class System{
 
     public:
         //orario del sistema
-        Time current_time{"00:00"};
+        Stime current_time{"00:00"};
 
         // Limite totale del sistema (rete elettrica + impianto fotovoltaico)
         int system_capacity;

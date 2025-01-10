@@ -1,6 +1,6 @@
 #include "../include/cp.h"
 
-CP::CP(std:: string n, int i, int c, Time cd): Device(n, i, c){
+CP::CP(std:: string n, int i, int c, Stime cd): Device(n, i, c){
     // cycle_duration e cd puntano alla stessa area di memoria
     cycle_duration = cd;
     // manual_stop = false;
@@ -39,6 +39,6 @@ void CP::reset_timer(){
 }
 */
 
-Time CP::get_duration(){
+Stime CP::get_duration(){
     return cycle_duration;
 }

@@ -39,6 +39,6 @@ void M::rm(){
 }
 */
 
-Time M::get_stop(){
+Stime M::get_stop(){
     return stop;
 }

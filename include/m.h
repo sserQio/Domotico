@@ -6,10 +6,10 @@
 class M : public Device{
     private:
         // Orario di inizio esecuzione del dispositivo
-        // Time start;
+        // Stime start;
 
         // Orario di fine esecuzione del dispositivo
-        Time stop;
+        Stime stop;
 
     public:
         // Costruttore
@@ -34,7 +34,7 @@ class M : public Device{
         //void reset_timer() override;
 
         // Ritorna l'ora di spegnimento
-        Time get_stop();
+        Stime get_stop();
 };
 
 #endif // M_H

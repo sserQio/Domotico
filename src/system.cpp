@@ -39,7 +39,7 @@ CP* search_cp_device(std::string device_name){
 }
 
 void System::show(){
-    Time duration;
+    Stime duration;
     std::cout << "[ ";
     current_time.print_time();  // Utilizziamo le nostre funzioni :D
     std::cout << " ]" << std::endl;

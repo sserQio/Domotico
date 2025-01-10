@@ -4,7 +4,7 @@
 
 int main() {
     M pv("Impianto Fotovoltaico", 0, 1500);
-    Time t_w_m(1,50);
+    Stime t_w_m(1,50);
     CP washing_machine("Lavatrice", 1, -2000, t_w_m);
 
     std::cout << "Creo oggetto Impianto Fotovoltaico" << std::endl;
