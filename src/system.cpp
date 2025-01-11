@@ -111,7 +111,7 @@ void System::set_time(std::string time){
     }
 
     // Caso in cui non abbiamo acceso nessun dispositivo dopo l'orario passato come parametro (time)
-    if (a_counter = devices.size()){
+    if (a_counter == devices.size()){
         while (s_counter < d_off.size()){
             cp_s = dynamic_cast<CP*>(&d_off[s_counter]);
             m_s = dynamic_cast<M*>(&d_off[s_counter]);
@@ -142,7 +142,7 @@ void System::set_time(std::string time){
     }
 
     // Caso in cui non abbiamo spento nessun dispositivo dopo l'orario passato come parametro (time)
-    if (s_counter = d_off.size()){
+    if (s_counter == d_off.size()){
         while (a_counter < devices.size()){
             cp_a = dynamic_cast<CP*>(&devices[a_counter]);
             m_a = dynamic_cast<M*>(&devices[a_counter]);
@@ -281,7 +281,7 @@ void System::set_time(std::string time){
 
     // Abbiamo finito di scorrere gli spegniemnti quindi s_counter = d_off.size()
     // Scorriamo tutto il vettore di accensione
-    if(s_counter = d_off.size()){
+    if(s_counter == d_off.size()){
        while (a_counter < devices.size() && devices[a_counter].get_autoStart() < time){
         current_time = devices[a_counter].get_autoStart();
         std::cout << "[ ";
@@ -294,7 +294,7 @@ void System::set_time(std::string time){
 
     // Abbiamno finito di scorrere le accensioni, quindi a_counter = devices.size()
     // Scorriamo tutto ilo vettore di spegnimento
-    if (a_counter = devices.size()){
+    if (a_counter == devices.size()){
         while (s_counter < d_off.size()){
             cp_s = dynamic_cast<CP*>(&d_off[s_counter]);
             m_s = dynamic_cast<M*>(&d_off[s_counter]);
@@ -354,7 +354,9 @@ void System::devices_sorting_on(){
 }
 
 void System::devices_sorting_off(std::vector<Device>& v){
-    std::sort(v.begin(), v.end(), compare_devices);
+    std::sort(v.begin(), v.end(), [this](Device& a, Device& b) {
+        return compare_devices(&a, &b);
+    });
 }
 
 bool System::compare_devices(Device* a, Device* b){

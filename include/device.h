@@ -5,7 +5,6 @@
 #include <string>
 #include <vector>
 #include "../include/stime.h"
-// #include "../include/system.h"
 
 class Device{
     private:
