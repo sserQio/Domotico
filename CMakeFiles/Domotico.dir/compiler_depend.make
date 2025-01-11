@@ -772,6 +772,7 @@ CMakeFiles/Domotico.dir/src/cp.cpp.o: src/cp.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/format \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/functional \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/initializer_list \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iomanip \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/ios \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iosfwd \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iostream \
@@ -1733,6 +1734,7 @@ CMakeFiles/Domotico.dir/src/device.cpp.o: src/device.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/format \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/functional \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/initializer_list \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iomanip \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/ios \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iosfwd \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iostream \
@@ -2693,6 +2695,7 @@ CMakeFiles/Domotico.dir/src/m.cpp.o: src/m.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/format \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/functional \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/initializer_list \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iomanip \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/ios \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iosfwd \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iostream \
@@ -3654,6 +3657,7 @@ CMakeFiles/Domotico.dir/src/stime.cpp.o: src/stime.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/format \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/functional \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/initializer_list \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iomanip \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/ios \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iosfwd \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iostream \
@@ -4613,6 +4617,7 @@ CMakeFiles/Domotico.dir/src/system.cpp.o: src/system.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/format \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/functional \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/initializer_list \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iomanip \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/ios \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iosfwd \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iostream \
@@ -5045,6 +5050,10 @@ include/cp.h:
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/sys/_types/_gid_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/ios:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/__math/inverse_hyperbolic_functions.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iomanip:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/format:
 
@@ -5525,8 +5534,6 @@ include/cp.h:
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/__algorithm/generate.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/__type_traits/is_trivially_copyable.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/__math/inverse_hyperbolic_functions.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/__algorithm/ranges_partition_point.h:
 
@@ -6112,10 +6119,6 @@ src/device.cpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/__algorithm/ranges_set_union.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/__algorithm/pstl_merge.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/string.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/initializer_list:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/machine/endian.h:
@@ -6497,6 +6500,10 @@ src/cp.cpp:
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/__algorithm/ranges_count.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/_types/_uintmax_t.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/string.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/__algorithm/pstl_merge.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/_time.h:
 

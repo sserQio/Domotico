@@ -6,6 +6,8 @@ CP::CP(std:: string n, int i, int c, Stime cd): Device(n, i, c){
     // manual_stop = false;
 }
 
+// Costruttore di Copia
+/*
 CP::CP(const CP& other) : Device(other), cycle_duration(other.cycle_duration) {
 }
 
@@ -16,6 +18,7 @@ CP& CP::operator=(const CP& other) {
     }
     return *this;
 }
+*/
 
 void CP::set(std::string command){
     Device::set(command);

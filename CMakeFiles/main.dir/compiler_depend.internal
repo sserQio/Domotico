@@ -773,6 +773,7 @@ CMakeFiles/main.dir/src/main.cpp.o
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/format
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/functional
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/initializer_list
+ /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iomanip
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/ios
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iosfwd
  /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iostream
@@ -960,7 +961,11 @@ CMakeFiles/main.dir/src/main.cpp.o
  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stddef.h
  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stdint.h
  /Users/sergio/Documents/Coding/Domotico/include/stime.h
+ /Users/sergio/Documents/Coding/Domotico/include/cp.h
  /Users/sergio/Documents/Coding/Domotico/include/device.h
+ /Users/sergio/Documents/Coding/Domotico/include/m.h
+ /Users/sergio/Documents/Coding/Domotico/include/stime.h
  /Users/sergio/Documents/Coding/Domotico/include/cp.h
  /Users/sergio/Documents/Coding/Domotico/include/m.h
+ /Users/sergio/Documents/Coding/Domotico/include/system.h
 

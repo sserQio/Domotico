@@ -3,7 +3,8 @@
 M::M(std::string n, int i, int c) : Device(n, i, c){
     stop.set_time("00:00");
 }
-
+// Costruttore di Copia
+/*
 M::M(const M& other) : Device(other), stop(other.stop) {
 }
 
@@ -14,6 +15,7 @@ M& M::operator=(const M& other) {
     }
     return *this;
 }
+*/
 
 void M::set(std::string command){
     Device::set(command);

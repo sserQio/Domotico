@@ -959,4 +959,9 @@ CMakeFiles/main.dir/src/main.cpp.o: \
   /Users/sergio/Documents/Coding/Domotico/src/../include/m.h \
   /Users/sergio/Documents/Coding/Domotico/src/../include/../include/device.h \
   /Users/sergio/Documents/Coding/Domotico/src/../include/../include/../include/stime.h \
-  /Users/sergio/Documents/Coding/Domotico/src/../include/cp.h
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iomanip \
+  /Users/sergio/Documents/Coding/Domotico/src/../include/cp.h \
+  /Users/sergio/Documents/Coding/Domotico/src/../include/system.h \
+  /Users/sergio/Documents/Coding/Domotico/src/../include/../include/stime.h \
+  /Users/sergio/Documents/Coding/Domotico/src/../include/../include/m.h \
+  /Users/sergio/Documents/Coding/Domotico/src/../include/../include/cp.h

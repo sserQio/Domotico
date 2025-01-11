@@ -1,33 +1,39 @@
 #include <iostream>
 #include "../include/m.h"
 #include "../include/cp.h"
+#include "../include/system.h"
 
 int main() {
-    /*
-    M pv("Impianto Fotovoltaico", 0, 1500);
-    Stime t_w_m(1,50);
-    CP washing_machine("Lavatrice", 1, -2000, t_w_m);
+    
+    System casa{};
+    std::string name = "Lavatrice";
+    Device* d = nullptr;
+    d = casa.search_device(name);
+    std::cout << "Qui viene scritto Lavatrice -> " << d->get_name() << std::endl;
+    CP* l = dynamic_cast<CP*>(d);
+    std::cout << "La durata del ciclo è: " << l->get_duration() << std::endl;
 
-    std::cout << "Creo oggetto Impianto Fotovoltaico" << std::endl;
-    M pv("Impianto Fotovoltaico", 0, 1500);
-    pv.print();
-    std::cout << "Accendiamo il dispositivo" << std::endl;
-    pv.set("on");
-    std::cout << "Settiamo il timer del dispositivo" << std::endl;
-    pv.set("17:12", "23:59");
-    std::cout << "Controlliamo che l'oggetto abbia il timer impostato" << std::endl;
-    pv.print();
-    std::cout << "Ora rimuoviamo il timer" << std::endl;
-    pv.rm();
-    std::cout << "Controllo il timer sia stato rimosso" << std::endl;
-    pv.print();
-    std::cout << "Proviamo la funzione show" << std::endl;
-    pv.show();
+    name = "Frigorifero";
+    Device* d2 = nullptr;
+    d2 = casa.search_device(name);
+    std::cout << "Qui viene scritto Frigorifero -> " << d2->get_name() << std::endl;
+    M* t = dynamic_cast<M*>(d2);
+    std::cout << "L'orario di spegnimento è: " << t->get_stop() << std::endl;
+    std::cout << "Il consumo di Frigorifero è: " << d2->get_consumption() << std::endl;
 
-    std::cout << "Proviamo i metodi manuali" << std::endl;
-    std::cout << "Spegniamo l'impianto fotovoltaico" << std::endl;
-    pv.set("off");
-    pv.print();
-    */
+    l -> set("on");
+    std::cout << "Ora la Lavatrice è accesa" << std::endl;
+    std::cout << "Lo è veramente? Lo stato è: " << l -> get_is_on() << std::endl;
+    
+
+    t -> set("on");
+    std::cout << "Ora il Frigorifero è acceso" << std::endl;
+    std::cout << "Lo è veramente? Lo stato è: " << t -> get_is_on() << std::endl;
+    t -> set("19:30", "20:00");
+    std::cout << "Ora il Frigorifero si spegne alle " << t -> get_stop() << std::endl;
+    t -> rm();
+    t -> get_autoStart().print_time();
+
+
     return 0;
 }

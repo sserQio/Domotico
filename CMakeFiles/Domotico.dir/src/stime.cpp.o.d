@@ -956,4 +956,5 @@ CMakeFiles/Domotico.dir/src/stime.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/__format/formatter_string.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/__format/formatter_tuple.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/print \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/unistd.h
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/unistd.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk/usr/include/c++/v1/iomanip

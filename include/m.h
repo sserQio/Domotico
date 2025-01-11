@@ -13,10 +13,10 @@ class M : public Device{
         M(std::string n, int i, int c);
 
         // Costruttore di copia
-        M(const M& other);
+        // M(const M& other);
 
         // Operatore di assegnazione di copia
-        M& operator=(const M& other);
+        // M& operator=(const M& other);
         
         // Override della funzione set
         void set(std::string command); // tolto override
@@ -28,7 +28,7 @@ class M : public Device{
         void rm(); // tolto override
 
         // Override della funzione reset_timer
-        //void reset_timer() override;
+        // void reset_timer() override;
 
         // Ritorna l'ora di spegnimento
         Stime get_stop();

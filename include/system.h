@@ -15,6 +15,9 @@ class System{
         int pv_production = 0;
 
     public:
+        // Costruttore
+        System();
+        
         //orario del sistema
         Stime current_time{"00:00"};
 
@@ -22,16 +25,17 @@ class System{
         int system_capacity;
 
         // Vettore di puntatori alla classe base Device
-        std::vector<Device> devices;
+        std::vector<Device*> devices;
 
         // Vector dei dispositivi CP 
-        std::vector<CP> cp_devices;
+        // std::vector<CP> cp_devices;
         // Vector dei dispositivi M
-        std::vector<M> m_devices;
+        // std::vector<M> m_devices;
 
         // Funzione per cercare un dispositivo nel sistema
-        M* search_m_device(std::string device_name);
-        CP* search_cp_device(std::string device_name);
+        Device* search_device(std::string device_name);
+        // M* search_m_device(std::string device_name);
+        // CP* search_cp_device(std::string device_name);
 
         // Mostra la lista di tutti i dispositivi (attivi e inattivi) con la produzione/consumo
         // energetico di ciascuno dalle 00:00 al momento di invio del comando. Inoltre
@@ -55,7 +59,7 @@ class System{
         void devices_sorting_on();
 
         // Algoritmo per ordinare in ordine crescente gli oggetti devices in base all'orario di spegnimento
-        void devices_sorting_off(std::vector<Device>& v);
+        void devices_sorting_off(std::vector<Device*>& v);
 
         // Algoritmo per ordinare in ordine crescente gli oggetti device spenti
         bool compare_devices(Device* a, Device* b);

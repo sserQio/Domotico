@@ -95,3 +95,10 @@ bool Stime::operator<=(const Stime& t) const{
     if((this -> hours == t.hours) && (this -> minutes <= t.minutes)) return true;
     return false;
 }
+
+// Essendo friend non appartiene alla classe quindi non usa l'operatore di risoluzione di scope ::
+std::ostream& operator<<(std::ostream& os, const Stime& time) {
+            os << std::setw(2) << std::setfill('0') << time.hours << ":"
+               << std::setw(2) << std::setfill('0') << time.minutes;
+            return os;
+}

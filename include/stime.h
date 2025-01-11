@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <iomanip>
 
 class Stime{
     private:
@@ -53,6 +54,9 @@ class Stime{
 
         // Overloading dell'operatore <=
         bool operator<=(const Stime& t) const;
+
+        // Overloading dell'operatore <<
+        friend std::ostream& operator<<(std::ostream& os, const Stime& time);
 };
 
 #endif // STIME_H
