@@ -56,7 +56,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /Users/sergio/Documents/Coding/Domotico
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/sergio/Documents/Coding/Domotico
+CMAKE_BINARY_DIR = /Users/sergio/Documents/Coding/Domotico/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Domotico.dir/depend.make
@@ -73,9 +73,9 @@ CMakeFiles/Domotico.dir/codegen:
 .PHONY : CMakeFiles/Domotico.dir/codegen
 
 CMakeFiles/Domotico.dir/src/cp.cpp.o: CMakeFiles/Domotico.dir/flags.make
-CMakeFiles/Domotico.dir/src/cp.cpp.o: src/cp.cpp
+CMakeFiles/Domotico.dir/src/cp.cpp.o: /Users/sergio/Documents/Coding/Domotico/src/cp.cpp
 CMakeFiles/Domotico.dir/src/cp.cpp.o: CMakeFiles/Domotico.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/sergio/Documents/Coding/Domotico/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Domotico.dir/src/cp.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/sergio/Documents/Coding/Domotico/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Domotico.dir/src/cp.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Domotico.dir/src/cp.cpp.o -MF CMakeFiles/Domotico.dir/src/cp.cpp.o.d -o CMakeFiles/Domotico.dir/src/cp.cpp.o -c /Users/sergio/Documents/Coding/Domotico/src/cp.cpp
 
 CMakeFiles/Domotico.dir/src/cp.cpp.i: cmake_force
@@ -87,9 +87,9 @@ CMakeFiles/Domotico.dir/src/cp.cpp.s: cmake_force
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/sergio/Documents/Coding/Domotico/src/cp.cpp -o CMakeFiles/Domotico.dir/src/cp.cpp.s
 
 CMakeFiles/Domotico.dir/src/device.cpp.o: CMakeFiles/Domotico.dir/flags.make
-CMakeFiles/Domotico.dir/src/device.cpp.o: src/device.cpp
+CMakeFiles/Domotico.dir/src/device.cpp.o: /Users/sergio/Documents/Coding/Domotico/src/device.cpp
 CMakeFiles/Domotico.dir/src/device.cpp.o: CMakeFiles/Domotico.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/sergio/Documents/Coding/Domotico/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Domotico.dir/src/device.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/sergio/Documents/Coding/Domotico/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Domotico.dir/src/device.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Domotico.dir/src/device.cpp.o -MF CMakeFiles/Domotico.dir/src/device.cpp.o.d -o CMakeFiles/Domotico.dir/src/device.cpp.o -c /Users/sergio/Documents/Coding/Domotico/src/device.cpp
 
 CMakeFiles/Domotico.dir/src/device.cpp.i: cmake_force
@@ -101,9 +101,9 @@ CMakeFiles/Domotico.dir/src/device.cpp.s: cmake_force
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/sergio/Documents/Coding/Domotico/src/device.cpp -o CMakeFiles/Domotico.dir/src/device.cpp.s
 
 CMakeFiles/Domotico.dir/src/m.cpp.o: CMakeFiles/Domotico.dir/flags.make
-CMakeFiles/Domotico.dir/src/m.cpp.o: src/m.cpp
+CMakeFiles/Domotico.dir/src/m.cpp.o: /Users/sergio/Documents/Coding/Domotico/src/m.cpp
 CMakeFiles/Domotico.dir/src/m.cpp.o: CMakeFiles/Domotico.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/sergio/Documents/Coding/Domotico/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Domotico.dir/src/m.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/sergio/Documents/Coding/Domotico/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Domotico.dir/src/m.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Domotico.dir/src/m.cpp.o -MF CMakeFiles/Domotico.dir/src/m.cpp.o.d -o CMakeFiles/Domotico.dir/src/m.cpp.o -c /Users/sergio/Documents/Coding/Domotico/src/m.cpp
 
 CMakeFiles/Domotico.dir/src/m.cpp.i: cmake_force
@@ -115,9 +115,9 @@ CMakeFiles/Domotico.dir/src/m.cpp.s: cmake_force
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/sergio/Documents/Coding/Domotico/src/m.cpp -o CMakeFiles/Domotico.dir/src/m.cpp.s
 
 CMakeFiles/Domotico.dir/src/system.cpp.o: CMakeFiles/Domotico.dir/flags.make
-CMakeFiles/Domotico.dir/src/system.cpp.o: src/system.cpp
+CMakeFiles/Domotico.dir/src/system.cpp.o: /Users/sergio/Documents/Coding/Domotico/src/system.cpp
 CMakeFiles/Domotico.dir/src/system.cpp.o: CMakeFiles/Domotico.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/sergio/Documents/Coding/Domotico/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Domotico.dir/src/system.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/sergio/Documents/Coding/Domotico/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Domotico.dir/src/system.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Domotico.dir/src/system.cpp.o -MF CMakeFiles/Domotico.dir/src/system.cpp.o.d -o CMakeFiles/Domotico.dir/src/system.cpp.o -c /Users/sergio/Documents/Coding/Domotico/src/system.cpp
 
 CMakeFiles/Domotico.dir/src/system.cpp.i: cmake_force
@@ -129,9 +129,9 @@ CMakeFiles/Domotico.dir/src/system.cpp.s: cmake_force
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/sergio/Documents/Coding/Domotico/src/system.cpp -o CMakeFiles/Domotico.dir/src/system.cpp.s
 
 CMakeFiles/Domotico.dir/src/stime.cpp.o: CMakeFiles/Domotico.dir/flags.make
-CMakeFiles/Domotico.dir/src/stime.cpp.o: src/stime.cpp
+CMakeFiles/Domotico.dir/src/stime.cpp.o: /Users/sergio/Documents/Coding/Domotico/src/stime.cpp
 CMakeFiles/Domotico.dir/src/stime.cpp.o: CMakeFiles/Domotico.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/sergio/Documents/Coding/Domotico/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Domotico.dir/src/stime.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/sergio/Documents/Coding/Domotico/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Domotico.dir/src/stime.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Domotico.dir/src/stime.cpp.o -MF CMakeFiles/Domotico.dir/src/stime.cpp.o.d -o CMakeFiles/Domotico.dir/src/stime.cpp.o -c /Users/sergio/Documents/Coding/Domotico/src/stime.cpp
 
 CMakeFiles/Domotico.dir/src/stime.cpp.i: cmake_force
@@ -160,7 +160,7 @@ libDomotico.a: CMakeFiles/Domotico.dir/src/system.cpp.o
 libDomotico.a: CMakeFiles/Domotico.dir/src/stime.cpp.o
 libDomotico.a: CMakeFiles/Domotico.dir/build.make
 libDomotico.a: CMakeFiles/Domotico.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/sergio/Documents/Coding/Domotico/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX static library libDomotico.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/sergio/Documents/Coding/Domotico/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX static library libDomotico.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/Domotico.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Domotico.dir/link.txt --verbose=$(VERBOSE)
 
@@ -173,6 +173,6 @@ CMakeFiles/Domotico.dir/clean:
 .PHONY : CMakeFiles/Domotico.dir/clean
 
 CMakeFiles/Domotico.dir/depend:
-	cd /Users/sergio/Documents/Coding/Domotico && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/sergio/Documents/Coding/Domotico /Users/sergio/Documents/Coding/Domotico /Users/sergio/Documents/Coding/Domotico /Users/sergio/Documents/Coding/Domotico /Users/sergio/Documents/Coding/Domotico/CMakeFiles/Domotico.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/sergio/Documents/Coding/Domotico/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/sergio/Documents/Coding/Domotico /Users/sergio/Documents/Coding/Domotico /Users/sergio/Documents/Coding/Domotico/build /Users/sergio/Documents/Coding/Domotico/build /Users/sergio/Documents/Coding/Domotico/build/CMakeFiles/Domotico.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/Domotico.dir/depend
 

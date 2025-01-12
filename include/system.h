@@ -49,6 +49,9 @@ class System{
         // Porta l'orario del sistema a 00:00 e riporta i dispositivi alle condizioni iniziali
         void reset_time();
 
+        // Rimuove tutti i timer ma i dispositivi mantengono il loro stato di accensione
+        void reset_timers();
+
         // - Sistema alle condizioni iniziali
         // - Orario impostato a 00:00
         // - Timer rimossi

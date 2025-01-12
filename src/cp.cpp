@@ -32,7 +32,7 @@ void CP::set(std::string start, std::string stop){
 }
 
 void CP::rm(){
-     Device::rm();
+    Device::rm();
 }
 
 // Valutare in seguito la sua utilità

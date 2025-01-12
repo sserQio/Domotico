@@ -11,11 +11,11 @@ System::System() {
     // Dispositivi M
 
     // Impianto Fotovoltaico / Manuale / +1500W
-    M* pv = new M("Impianto Fotovoltaico", 0, 1500);
+    M* pv = new M("Impianto fotovoltaico", 0, 1500);
     devices.push_back(pv);
 
     // Pompa di Calore / Manuale / -2000W
-    M* hp = new M("Pompa di Calore", 1, -2000);
+    M* hp = new M("Pompa di calore + termostato", 1, -2000);
     devices.push_back(hp);
 
     // Scaldabagno / Manuale / -1000W
@@ -37,11 +37,11 @@ System::System() {
     devices.push_back(dw);
 
     // Tapparelle Elettriche / CP / Ciclo: 1m / -300W
-    CP* blinds = new CP("Tapparelle", 6, -300, {"00:01"});
+    CP* blinds = new CP("Tapparelle elettriche", 6, -300, {"00:01"});
     devices.push_back(blinds);
 
     // Forno a Microonde / CP / Ciclo: 2m / -800W
-    CP* microwave = new CP("Microonde", 7, -800, {"00:02"});
+    CP* microwave = new CP("Forno a microonde", 7, -800, {"00:02"});
     devices.push_back(microwave);
 
     // Asciugatrice / CP / Ciclo: 1h / -500W
@@ -378,6 +378,12 @@ void System::set_time(std::string time){
 
 void System::reset_time(){
     current_time.set_time("00:00");
+    for (int i = 0; i < devices.size(); i++){
+        if (devices[i] -> get_is_on() == true) devices[i] -> rm();
+    }
+}
+
+void System::reset_timers(){
     for (int i = 0; i < devices.size(); i++){
         if (devices[i] -> get_is_on() == true) devices[i] -> rm();
     }
