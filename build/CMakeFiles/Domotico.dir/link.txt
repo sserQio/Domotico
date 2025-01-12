@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libDomotico.a CMakeFiles/Domotico.dir/src/cp.cpp.o CMakeFiles/Domotico.dir/src/device.cpp.o CMakeFiles/Domotico.dir/src/m.cpp.o CMakeFiles/Domotico.dir/src/system.cpp.o CMakeFiles/Domotico.dir/src/stime.cpp.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib libDomotico.a
