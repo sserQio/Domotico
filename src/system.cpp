@@ -1,4 +1,7 @@
 #include "../include/system.h"
+#include <iostream>
+#include <thread>
+#include <chrono>
 
 //std::vector<M> m_devices;
 //std::vector<CP> cp_devices;
@@ -379,28 +382,57 @@ void System::set_time(std::string time){
 void System::reset_time(){
     current_time.set_time("00:00");
     for (int i = 0; i < devices.size(); i++){
-        if (devices[i] -> get_is_on() == true) devices[i] -> rm();
+        if (devices[i] -> get_is_on() == true){
+            devices[i] -> set("off");
+            // Creiamo un puntatore a M per poter azzerare anche stop
+            M* m_ptr = dynamic_cast<M*>(devices[i]);
+            if (m_ptr) m_ptr -> rm();
+            std::cout << "[" << current_time << "] Il dispositivo " << devices[i] -> get_name() << " è stato rimosso ";
+            std::cout << devices[i] -> get_autoStart() << std::endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        }
     }
+    std::cout << "L'orario corrente del sistema è stato impostato a: [" << current_time << "]" << std::endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    std::cout << "Il sistema è stato riportato alle condizioni iniziali" << std::endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
 }
 
 void System::reset_timers(){
     for (int i = 0; i < devices.size(); i++){
-        if (devices[i] -> get_is_on() == true) devices[i] -> rm();
+        if (devices[i] -> get_is_on() == true){
+            devices[i] -> rm();
+            std::cout << "[" << current_time << "] Il dispositivo " << devices[i] -> get_name() << " è acceso";
+            std::cout << " e il timer è stato azzerato a: " << devices[i] -> get_autoStart() << std::endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        }   
     }
 }
 
 void System::reset_all(){
-    current_time.set_time("00:00");
     for (int i = 0; i < devices.size(); i++){
-        // Creiamo due puntatori dei due diversi tipi di device allpo stesso item del vettore
+        // Creiamo due puntatori dei due diversi tipi di device allo stesso item del vettore
         M* m_ptr = dynamic_cast<M*>(devices[i]);
         CP* cp_ptr = dynamic_cast<CP*>(devices[i]);
         if (m_ptr){
-            if (m_ptr -> get_is_on() == true) m_ptr -> set("off");
+            if (m_ptr -> get_is_on() == true){
+                m_ptr -> set("off");
+                std::cout << "[" << current_time << "] Il dispositivo " << m_ptr -> get_name() << " è stato spento";
+                std::cout << " e il timer è stato azzerato a: " << m_ptr -> get_autoStart() << std::endl;
+                std::this_thread::sleep_for(std::chrono::milliseconds(500));
+            }
         } else {
-            if (cp_ptr -> get_is_on() == true) cp_ptr -> set("off");
+            if (cp_ptr -> get_is_on() == true) {
+                cp_ptr -> set("off");
+                std::cout << "[" << current_time << "] Il dispositivo " << cp_ptr -> get_name() << " è stato spento";
+                std::cout << " e il timer è stato azzerato a: " << cp_ptr -> get_autoStart() << std::endl;
+                std::this_thread::sleep_for(std::chrono::milliseconds(500));
+            }
         }
     }
+    current_time.set_time("00:00");
+    std::cout << "L'orario corrente è stato impostato a: [" << current_time << "]" << std::endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
 }
 
 void System::devices_sorting_on(){

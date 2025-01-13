@@ -148,19 +148,18 @@ int main(){
                     }
                     std::cout << std::endl;
                     //EX CASO 1
-                    if (command[0] == "show" && command[1]==" ") house.show();
+                    if (command[0] == "show" && command[1]==" ") {
+                        std::cout << "Entra correttamente in show" << std::endl;
+                        house.show();
+                    }
                     else if (command[0] == "reset time") {
                         house.reset_time();
-                        std::cout << "È stata chiamata reset time" << std::endl;
-                        std::cout << "Il sistema è stato riportato alle condizioni iniziali" << std::endl;
                     } 
                     else if (command[0] == "reset timers") {
                         house.reset_timers();
-                        std::cout << "È stata chiamata reset timers" << std::endl;
                     }
                     else if (command[0] == "reset all") {
                         house.reset_all();
-                        std::cout << "È stata chiamata reset all" << std::endl;
                     }
                     //INIZIO VERI CASI 2
                     if (command[0] == "rm"){
@@ -178,7 +177,7 @@ int main(){
                     if (command[2] == "on" || command[2] == "off"){
                         d = house.search_device(command[1]);
                         d -> set(command[2]);
-                        std::cout << "Il dispositivo " << d -> get_name() << " si è ";
+                        std::cout << "[" << house.current_time << "] Il dispositivo " << d -> get_name() << " si è ";
                         if (command[2] == "on") std::cout << "acceso" << std::endl;
                         else std::cout << "spento" << std::endl;
                         std::this_thread::sleep_for(std::chrono::milliseconds(1500));
@@ -190,8 +189,12 @@ int main(){
                             std::cout << "Errore! Non puoi assegnare solo un orario per un dispositivo di tipo M" << std::endl;
                             break;
                         }
-                        d -> set(command[2], "");
-                        std::cout << "Il dispositivo " << d -> get_name() << " si accende alle: " << d -> get_autoStart() << std::endl;
+                        if (d -> get_is_on() == true){
+                            d -> set(command[2], "");
+                            std::cout << "[" << house.current_time << "] Il dispositivo " << d -> get_name() << " si accende alle: " << d -> get_autoStart() << std::endl;
+                        } else {
+                            std::cout << "Il dispositivo è spento, prima è necessario accenderlo" << std::endl;
+                        }
                         break;
                     }
                 }  
@@ -208,8 +211,12 @@ int main(){
                         break;
                     }
                     M* m_ptr = dynamic_cast<M*>(d);
-                    m_ptr -> set(command[2], command[3]);
-                    std::cout << "Il dispositivo " << m_ptr -> get_name() << "si accende alle: " << m_ptr -> get_autoStart() << " e si spegne alle: " << m_ptr -> get_stop() << std::endl;
+                    if (m_ptr -> get_is_on() == true){
+                        m_ptr -> set(command[2], command[3]);
+                        std::cout << "Il dispositivo " << m_ptr -> get_name() << " si accende alle: " << m_ptr -> get_autoStart() << " e si spegne alle: " << m_ptr -> get_stop() << std::endl;
+                    } else {
+                        std::cout << "Il dispositivo è spento, prima è necessario accenderlo" << std::endl;
+                    }
                     break;
                 }
                 default: {

@@ -1,4 +1,0 @@
-/Users/sergio/Documents/Coding/Domotico/build/CMakeFiles/Domotico.dir
-/Users/sergio/Documents/Coding/Domotico/build/CMakeFiles/main.dir
-/Users/sergio/Documents/Coding/Domotico/build/CMakeFiles/edit_cache.dir
-/Users/sergio/Documents/Coding/Domotico/build/CMakeFiles/rebuild_cache.dir

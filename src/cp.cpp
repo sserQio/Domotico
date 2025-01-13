@@ -28,7 +28,6 @@ void CP::set(std::string command){
 
 void CP::set(std::string start, std::string stop){
     autoStart.set_time(start);
-    // manual_stop = false;
 }
 
 void CP::rm(){
