@@ -18,7 +18,7 @@ class System{
         // Costruttore
         System();
         
-        //orario del sistema
+        // Orario del sistema
         Stime current_time{"00:00"};
 
         // Limite totale del sistema (rete elettrica + impianto fotovoltaico)
@@ -27,24 +27,17 @@ class System{
         // Vettore di puntatori alla classe base Device
         std::vector<Device*> devices;
 
-        // Vector dei dispositivi CP 
-        // std::vector<CP> cp_devices;
-        // Vector dei dispositivi M
-        // std::vector<M> m_devices;
-
         // Funzione per cercare un dispositivo nel sistema
         Device* search_device(std::string device_name);
-        // M* search_m_device(std::string device_name);
-        // CP* search_cp_device(std::string device_name);
 
         // Mostra la lista di tutti i dispositivi (attivi e inattivi) con la produzione/consumo
         // energetico di ciascuno dalle 00:00 al momento di invio del comando. Inoltre
         // mostra la produzione/consumo energetico totale del sistema dalle 00:00 al momento
         // di invio del comando
-        void show();
+        void show_all();
 
         // Salta a una specifica ora del giorno
-        void set_time(std::string time);
+        void set_time(std::string t);
 
         // Porta l'orario del sistema a 00:00 e riporta i dispositivi alle condizioni iniziali
         void reset_time();

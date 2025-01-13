@@ -20,6 +20,9 @@ class Device{
         // Varibile che definisce l'accensione o meno di un dispositivo
         bool is_on;
 
+        // Variabile che tiene traccia del consumo totale di un dispositivo
+        double total_consumption;
+
     protected:
         // Orario di inizio di esecuzione automatico di un dispositivo
         // Questo parametro è comune a tutti i dispositivi, indipendentemente da M o CP
@@ -71,6 +74,12 @@ class Device{
 
         // Ritorna il valore di auto_start
         Stime get_autoStart();
+
+        // Ritorna il valore di total_consumption
+        int get_total_consumption();
+
+        // Aggiorna il valore di total_consumption in base a quanto ha consumato il dispositivo finora
+        void update_total_consumption(Stime t);
 };
 
 #endif // DEVICE_H

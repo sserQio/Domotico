@@ -1,12 +1,12 @@
 #include "../include/device.h"
 
-
 Device::Device(std::string n, int i, int c):
     name {n},
     id {i},
     consumption {c},
     autoStart {"00:00"},
-    is_on {false}
+    is_on {false},
+    total_consumption{0}
 {}
 
 // Costruttore di copia
@@ -15,7 +15,8 @@ Device::Device(const Device& other) :
     id {other.id},
     consumption {other.consumption},
     autoStart {other.autoStart},
-    is_on {other.is_on}
+    is_on {other.is_on},
+    total_consumption {other.total_consumption}
 {}
 
 // Operatore di assegnazione di copia
@@ -26,6 +27,7 @@ Device& Device::operator=(const Device& other) {
         consumption = other.consumption;
         autoStart = other.autoStart;
         is_on = other.is_on;
+        total_consumption = other.total_consumption;
     }
     return *this;
 }
@@ -36,6 +38,7 @@ void Device::set(std::string command){
     } else {
         is_on = false;
         autoStart.set_time("00:00");
+
     }
 }
 
@@ -71,4 +74,13 @@ bool Device::get_is_on(){
 
 Stime Device::get_autoStart(){
     return autoStart;
+}
+
+int Device::get_total_consumption(){
+    return total_consumption;
+}
+
+void Device::update_total_consumption(Stime t){
+    t = t - autoStart;
+    total_consumption += consumption * (t.get_hours() + ((double)t.get_minutes()/60));
 }

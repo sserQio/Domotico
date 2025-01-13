@@ -4,7 +4,7 @@ Stime::Stime(){
     hours = 0;
     minutes = 0;
 }
-Stime ::Stime(int h, int m){
+Stime::Stime(int h, int m){
     hours=h;
     minutes=m;
 }

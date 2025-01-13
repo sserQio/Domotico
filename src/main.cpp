@@ -45,7 +45,7 @@ std::vector<std::string> readCommand(std::string in){
     // );
 
     std::regex pattern(
-        R"((set|rm|show|set time|reset time|reset timers|reset all))"   // Comando principale
+        R"((set|rm|show|set time|reset time|reset timers|reset all|show all))"   // Comando principale
         R"((?:\s+\{(Impianto fotovoltaico|Pompa di calore \+ termostato|Scaldabagno|Frigorifero|Lavatrice|Lavastoviglie|Tapparelle elettriche|Forno a microonde|Asciugatrice|Televisore)\})?)" // Secondo argomento opzionale
         R"((\s+\{(on|off|(?:[01]\d|2[0-3]):[0-5]\d)\})?)"            // Terzo argomento opzionale
         R"((?:\s+\{((?:[01]\d|2[0-3]):[0-5]\d)\})?)"                  // Quarto argomento opzionale
@@ -86,13 +86,13 @@ int main(){
     std::cout << "Il sistema di gestione dei dispositivi elettrici è stato creato" << std::endl;
     std::cout << "---------------------------------------------------------------" << std::endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
-    help();
+    // help(); DA SCOMMENTARE DOPO DEBUGGING
 
     while(true){
         bool start = true;
         while(true){
             std::cout << "---------------------------------------------------------------" << std::endl;
-            std::cout << "Vuoi procedere con la gestione della casa? [y]es" << std::endl;
+            std::cout << "Vuoi procedere con la gestione dei dispositivi? [y]es" << std::endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
             std::cout << "Vuoi uscire dal programma? 'exit'" << std::endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
@@ -148,9 +148,9 @@ int main(){
                     }
                     std::cout << std::endl;
                     //EX CASO 1
-                    if (command[0] == "show" && command[1]==" ") {
+                    if (command[0] == "show all") { // tolto && command[1]==" "
                         std::cout << "Entra correttamente in show" << std::endl;
-                        house.show();
+                        house.show_all();
                     }
                     else if (command[0] == "reset time") {
                         house.reset_time();
@@ -169,18 +169,24 @@ int main(){
                     } else if (command[0] == "show"){
                         d = house.search_device(command[1]);
                         d -> show();
-                    } else if (command[0] == "set time") house.set_time(command[1]);
+                    } //else if (command[0] == "set time") house.set_time(command[1]);
                     break;
                 }
                 case 3: {
                     std::cout << "CASO 3" << std::endl;
                     if (command[2] == "on" || command[2] == "off"){
                         d = house.search_device(command[1]);
+                        if (command[2] == "off") d -> update_total_consumption(house.current_time);
                         d -> set(command[2]);
                         std::cout << "[" << house.current_time << "] Il dispositivo " << d -> get_name() << " si è ";
                         if (command[2] == "on") std::cout << "acceso" << std::endl;
                         else std::cout << "spento" << std::endl;
                         std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+                        break;
+                    } 
+                    if (command[0] == "set time") {
+                        std::cout << "command[2]: " << command[2] << std::endl;
+                        house.set_time(command[2]);
                         break;
                     } else {
                         d = house.search_device(command[1]);
@@ -212,8 +218,15 @@ int main(){
                     }
                     M* m_ptr = dynamic_cast<M*>(d);
                     if (m_ptr -> get_is_on() == true){
-                        m_ptr -> set(command[2], command[3]);
-                        std::cout << "Il dispositivo " << m_ptr -> get_name() << " si accende alle: " << m_ptr -> get_autoStart() << " e si spegne alle: " << m_ptr -> get_stop() << std::endl;
+                        Stime first = command[2];
+                        Stime second = command[3];
+                        if (second < first) {
+                            std::cout << "Gli orari inseriti non sono corretti" << std::endl;
+                        }
+                        else {
+                            m_ptr -> set(command[2], command[3]);
+                            std::cout << "Il dispositivo " << m_ptr -> get_name() << " si accende alle: " << m_ptr -> get_autoStart() << " e si spegne alle: " << m_ptr -> get_stop() << std::endl;
+                        }
                     } else {
                         std::cout << "Il dispositivo è spento, prima è necessario accenderlo" << std::endl;
                     }

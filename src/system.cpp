@@ -2,9 +2,7 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
-
-//std::vector<M> m_devices;
-//std::vector<CP> cp_devices;
+#include <algorithm>
 
 std::vector<Device*> devices;
 
@@ -56,7 +54,6 @@ System::System() {
     devices.push_back(tv);
 }
 
-
 Device* System::search_device(std::string device_name){
     Device* p = nullptr;
     for (int i = 0; i < devices.size(); i++){
@@ -68,62 +65,58 @@ Device* System::search_device(std::string device_name){
     return p;
 }
 
-/*
-M* search_m_device(std::string device_name){
-    M *p = nullptr;
-    for (int i = 0; i < 4; i++){ // DA CAMBIARE IL VALORE 4
-        if (m_devices[i].get_name() == device_name){
-            p = &m_devices[i];
-            break;
-        }
-    }
-    return p ;
-}
-CP* search_cp_device(std::string device_name){
-    CP *p = nullptr;
-    for (int i = 0; i < 4; i++){ // DA CAMBIARE IL VALORE 4
-        if (cp_devices[i].get_name() == device_name){
-            p = &cp_devices[i];
-            break;
-        }
-    }
-    return p ;
-}
-*/
-
-void System::show(){
+void System::show_all(){
     Stime duration;
-    std::cout << "[ ";
-    current_time.print_time();  // Utilizziamo le nostre funzioni :D
-    std::cout << " ]" << std::endl;
-    int XX = 0;
-    int YY = 0;
+    // Variabile per la produzione energetica
+    double XX = 0;
+    // Variabile per il consumo energetico
+    double YY = 0;
     
     for (int i = 0; i < devices.size(); i ++){
         duration = current_time - devices[i] -> get_autoStart();
-        double total_device_consumption = devices[i] -> get_consumption() * (duration.get_hours() + ((double)duration.get_minutes()/60));
-        if (devices[i] -> get_name() == "Impianto Fotovoltaico"){
-            XX = devices[i] -> get_consumption();
-            std::cout << "L'Impianto Fotovoltaico produce: " << total_device_consumption;
+        double total_device_consumption = 0;
+        if (devices[i] -> get_is_on() == true){
+            total_device_consumption = devices[i] -> get_consumption() * (duration.get_hours() + ((double)duration.get_minutes()/60)) + devices[i] -> get_total_consumption();
         } else {
-            std::cout << "Il dispositivo" << devices[i] -> get_name() << " ha consumato: " << total_device_consumption << std::endl;
+            total_device_consumption = devices[i] -> get_total_consumption();
+        }
+        
+        if (devices[i] -> get_name() == "Impianto fotovoltaico"){
+            XX = total_device_consumption;
+            std::cout << "L'Impianto fotovoltaico produce: " << total_device_consumption << std::endl;
+        } else {
+            std::cout << "Il dispositivo " << devices[i] -> get_name() << " ha consumato: " << total_device_consumption << std::endl;
             YY += total_device_consumption;
         }
     }
     std::cout << "Attualmente il sistema ha prodotto " << XX << " kWh e consumato " << YY << " kWh." << std::endl;
 }
 
-void System::set_time(std::string time){
-    std::cout << "Salto all'ora scelta: " + time << std::endl;
-    std::cout << "[ ";
-    current_time.print_time();
-    std::cout << " ]" << std::endl;
-
+void System::set_time(std::string t){
+    Stime time{t};
+    // Vettore in cui mettiamo i dispositivi ordinati in ordine crescente di spegnimento
     std::vector<Device*> d_off;
+    // Non si può (ancora :O) tornare indietro nel tempo
+    if (time < current_time){
+        std::cout << "Non puoi tornare indietro nel tempo!" << std::endl;
+        return;
+    }
 
+    // Facciamo un bool che ci controlla che ci sia almeno un dispositivo che è stato acceso
+    // altrimenti si esce dalla funzione visto che non è stato fatto niente.
+    // Sfruttiamo il for per copiare il vettore in modo da non doverne scrivere un altro
+    bool spenti = true;
     for (int i = 0; i < devices.size(); i++){
         d_off.push_back(devices[i]);
+        if (devices[i] -> get_is_on() == true) spenti = false;
     }
+
+    if (spenti){
+        std::cout << "Non è stato acceso nessun dispositivo finora" << std::endl;
+        current_time = time;
+        std::cout << "L'orario corrente è: [" << current_time << "]" << std::endl;
+        return;
+    } 
     
     devices_sorting_on();
     devices_sorting_off(d_off);
@@ -137,9 +130,11 @@ void System::set_time(std::string time){
     M* m_a = dynamic_cast<M*>(devices[a_counter]);
     CP* cp_s = dynamic_cast<CP*>(d_off[s_counter]);
     M* m_s = dynamic_cast<M*>(d_off[s_counter]);
+    // Variabile evitare che vengano stampati dispositivi mai accesi
+    Stime midnight{"00:00"};
 
-    // Cerchiamo il prmio elemento che si accende dopo l'orario attuale
-    while (a_counter<devices.size() && devices[a_counter] -> get_autoStart() < current_time){
+    // Cerchiamo il primo elemento che si accende dopo l'orario attuale
+    while (a_counter<devices.size() && ((devices[a_counter] -> get_autoStart()) < current_time)){
         a_counter++;
     }
 
@@ -153,7 +148,6 @@ void System::set_time(std::string time){
                 break;
             }
         }
-
         if (m_s){
             if (m_s -> get_stop() < current_time){
                 s_counter++;
@@ -172,22 +166,27 @@ void System::set_time(std::string time){
                 if (cp_s -> get_autoStart() + cp_s -> get_duration() > time){
                     break;
                 } else {
-                    std::cout << "[ ";
-                    current_time.print_time();
-                    std::cout << " ]";
-                    std::cout << "Il dispositivo " << cp_s -> get_name() << " si è spento" << std::endl;
+                    if (cp_s -> get_autoStart() != midnight){
+                        cp_s -> update_total_consumption(current_time);
+                        current_time = cp_s -> get_autoStart() + cp_s -> get_duration(); // --- NUOVA MODIFICA ---
+                        std::cout << "[" << current_time << "] ";
+                        std::cout << "Il dispositivo " << cp_s -> get_name() << " si è spento" << std::endl;
+                        cp_s -> set("off");
+                    }
                     s_counter++;
                 }
             }
-
             if (m_s){
                 if (m_s -> get_stop() > time){
                     break;
                 } else {
-                    std::cout << "[ ";
-                    current_time.print_time();
-                    std::cout << " ]";
-                    std::cout << "Il dispositivo " << m_s -> get_name() << " si è spento" << std::endl;
+                    if (m_s -> get_autoStart() != midnight){
+                        m_s -> update_total_consumption(current_time);
+                        current_time = m_s -> get_stop(); // --- NUOVA MODIFICA ---
+                        std::cout << "[" << current_time << "] ";
+                        std::cout << "Il dispositivo " << m_s -> get_name() << " si è spento" << std::endl;
+                        m_s -> set("off");
+                    }
                     s_counter++;
                 }
             }
@@ -203,22 +202,27 @@ void System::set_time(std::string time){
                 if (cp_a -> get_autoStart() + cp_a -> get_duration() > time){
                     break;
                 } else {
-                    std::cout << "[ ";
-                    current_time.print_time();
-                    std::cout << " ]";
-                    std::cout << "Il dispositivo " << cp_a -> get_name() << " si è spento" << std::endl;
+                    if (cp_a -> get_autoStart() != midnight){
+                        cp_a -> update_total_consumption(current_time);
+                        current_time = cp_a -> get_autoStart() + cp_a -> get_duration(); // --- NUOVA MODIFICA ---
+                        std::cout << "[" << current_time << "] ";
+                        std::cout << "Il dispositivo " << cp_a -> get_name() << " si è spento" << std::endl;
+                        cp_a -> set("off");
+                    }
                     a_counter++;
                 }
             }
-
             if (m_a){
                 if (m_a -> get_stop() > time){
                     break;
                 } else {
-                    std::cout << "[ ";
-                    current_time.print_time();
-                    std::cout << " ]";
-                    std::cout << "Il dispositivo " << m_a -> get_name() << " si è spento" << std::endl;
+                    if (m_a -> get_autoStart() != midnight){
+                        m_a -> update_total_consumption(current_time);
+                        current_time = m_a -> get_stop(); // --- NUOVA MODIFICA ---
+                        std::cout << "[" << current_time << "] ";
+                        std::cout << "Il dispositivo " << m_a -> get_name() << " si è spento" << std::endl;
+                        m_a -> set("off");
+                    }
                     a_counter++;
                 }
             }
@@ -228,29 +232,32 @@ void System::set_time(std::string time){
     // Caso in cui non abbiamo finito di scorrere nessuno dei due vettori
     while (a_counter < devices.size() && s_counter < d_off.size()){
             // Confronto tra un CP acceso e un CP spento
+            cp_a = dynamic_cast<CP*>(devices[a_counter]);
+            m_a = dynamic_cast<M*>(devices[a_counter]);
+            cp_s = dynamic_cast<CP*>(d_off[s_counter]);
+            m_s = dynamic_cast<M*>(d_off[s_counter]);
             if (cp_a && cp_s){
-                
                 if (cp_a -> get_autoStart() < cp_s -> get_autoStart() + cp_s -> get_duration()){
                     // Nel caso in cui l'orario richiesto dall'utente è minore (ciò significa che è stato superato e non
                     // va mostrato quello che succede dopo)
                     if (cp_a -> get_autoStart() > time) break;
-
-                    current_time = cp_a -> get_autoStart();
-                    std::cout << "[ ";
-                    current_time.print_time();
-                    std::cout << " ]";
-                    std::cout << "Il dispositivo " << cp_a -> get_name() << " si è acceso" << std::endl;
+                    if (cp_a -> get_autoStart() != midnight){
+                        current_time = cp_a -> get_autoStart();
+                        std::cout << "[" << current_time << "] ";
+                        std::cout << "Il dispositivo " << cp_a -> get_name() << " si è acceso" << std::endl;
+                    }
                     a_counter++;
                 } else {
                     // Nel caso in cui l'orario richiesto dall'utente è minore (ciò significa che è stato superato e non
                     // va mostrato quello che succede dopo)
                     if (cp_s -> get_autoStart() + cp_s -> get_duration() > time) break;
-
-                    current_time = cp_s -> get_autoStart() + cp_s -> get_duration();
-                    std::cout << "[ ";
-                    current_time.print_time();
-                    std::cout << " ]";
-                    std::cout << "Il dispositivo " << cp_s -> get_name() << " si è spento" << std::endl;
+                    if (cp_s -> get_autoStart() != midnight){
+                        cp_s -> update_total_consumption(current_time);
+                        current_time = cp_s -> get_autoStart() + cp_s -> get_duration();
+                        std::cout << "[" << current_time << "] ";
+                        std::cout << "Il dispositivo " << cp_s -> get_name() << " si è spento" << std::endl;
+                        cp_s -> set("off");
+                    }
                     s_counter++;
                 }
             }
@@ -258,24 +265,22 @@ void System::set_time(std::string time){
             // Confronto tra un CP acceso e un M spento
             if (cp_a && m_s){
                 if (cp_a -> get_autoStart() < m_s -> get_stop()){
-
                     if (cp_a -> get_autoStart() > time) break;
-
-                    current_time = cp_a -> get_autoStart();
-                    std::cout << "[ ";
-                    current_time.print_time();
-                    std::cout << " ]";
-                    std::cout << "Il dispositivo " << cp_a -> get_name() << " si è acceso" << std::endl;
+                    if (cp_a -> get_autoStart() != midnight){
+                        current_time = cp_a -> get_autoStart();
+                        std::cout << "[" << current_time << "] ";
+                        std::cout << "Il dispositivo " << cp_a -> get_name() << " si è acceso" << std::endl;
+                    }
                     a_counter++;
                 } else {
-
                     if (m_s -> get_stop() > time) break;
-
-                    current_time = m_s -> get_stop();
-                    std::cout << "[ ";
-                    current_time.print_time();
-                    std::cout << " ]";
-                    std::cout << "Il dispositivo " << m_s -> get_name() << " si è spento" << std::endl;
+                    if (m_s -> get_autoStart() != midnight){
+                        m_s -> update_total_consumption(current_time);
+                        current_time = m_s -> get_stop();
+                        std::cout << "[" << current_time << "] ";
+                        std::cout << "Il dispositivo " << m_s -> get_name() << " si è spento" << std::endl;
+                        m_s -> set("off");
+                    }
                     s_counter++;
                 }
             }
@@ -283,24 +288,22 @@ void System::set_time(std::string time){
             // Confronto tra un M acceso e un M spento
             if (m_a && m_s){
                 if (m_a -> get_autoStart() < m_s -> get_stop()){
-
                     if (m_a -> get_autoStart() > time) break;
-
-                    current_time = m_a -> get_autoStart();
-                    std::cout << "[ ";
-                    current_time.print_time();
-                    std::cout << " ]";
-                    std::cout << "Il dispositivo " << m_a -> get_name() << " si è acceso" << std::endl;
+                    if (m_a -> get_autoStart() != midnight){
+                        current_time = m_a -> get_autoStart();
+                        std::cout << "[" << current_time << "] ";
+                        std::cout << "Il dispositivo " << m_a -> get_name() << " si è acceso" << std::endl;
+                    }
                     a_counter++;
                 } else {
-
                     if (m_s -> get_stop() > time) break;
-
-                    current_time = m_s -> get_stop();
-                    std::cout << "[ ";
-                    current_time.print_time();
-                    std::cout << " ]";
-                    std::cout << "Il dispositivo " << m_s -> get_name() << " si è spento" << std::endl;
+                    if (m_s -> get_autoStart() != midnight){
+                        m_s -> update_total_consumption(current_time);
+                        current_time = m_s -> get_stop();
+                        std::cout << "[" << current_time << "] ";
+                        std::cout << "Il dispositivo " << m_s -> get_name() << " si è spento" << std::endl;
+                        m_s -> set("off");
+                    }
                     s_counter++;
                 }
             }
@@ -308,39 +311,37 @@ void System::set_time(std::string time){
             // Confronto tra un M acceso e un CP spento
             if (m_a && cp_s){
                 if (m_a -> get_autoStart() < cp_s -> get_autoStart() + cp_s -> get_duration()){
-
                     if (m_a -> get_autoStart() > time) break;
-
-                    current_time = m_a -> get_autoStart();
-                    std::cout << "[ ";
-                    current_time.print_time();
-                    std::cout << " ]";
-                    std::cout << "Il dispositivo " << m_a -> get_name() << " si è acceso" << std::endl;
+                    if (m_a -> get_autoStart() != midnight){
+                        current_time = m_a -> get_autoStart();
+                        std::cout << "[" << current_time << "] ";
+                        std::cout << "Il dispositivo " << m_a -> get_name() << " si è acceso" << std::endl;
+                    }
                     a_counter++;
                 } else {
-
                     if (cp_s -> get_autoStart() + cp_s -> get_duration() > time) break;
-
-                    current_time = cp_s -> get_autoStart() + cp_s -> get_duration();
-                    std::cout << "[ ";
-                    current_time.print_time();
-                    std::cout << " ]";
-                    std::cout << "Il dispositivo " << cp_s -> get_name() << " si è spento" << std::endl;
+                    if (cp_s -> get_autoStart() != midnight){
+                        cp_s -> update_total_consumption(current_time);
+                        current_time = cp_s -> get_autoStart() + cp_s -> get_duration();
+                        std::cout << "[" << current_time << "] ";
+                        std::cout << "Il dispositivo " << cp_s -> get_name() << " si è spento" << std::endl;
+                        cp_s -> set("off");
+                    }
                     s_counter++;
                 }
             }
 
     }
 
-    // Abbiamo finito di scorrere gli spegniemnti quindi s_counter = d_off.size()
+    // Abbiamo finito di scorrere gli spegnimenti quindi s_counter = d_off.size()
     // Scorriamo tutto il vettore di accensione
     if(s_counter == d_off.size()){
        while (a_counter < devices.size() && devices[a_counter] -> get_autoStart() < time){
-        current_time = devices[a_counter] -> get_autoStart();
-        std::cout << "[ ";
-        current_time.print_time();
-        std::cout << " ]";
-        std::cout << "Il dispositivo " << devices[a_counter] -> get_name() << " si è acceso" << std::endl;
+        if (devices[a_counter] -> get_autoStart() != midnight){
+            current_time = devices[a_counter] -> get_autoStart();
+            std::cout << "[" << current_time << "] ";
+            std::cout << "Il dispositivo " << devices[a_counter] -> get_name() << " si è acceso" << std::endl;
+        }
         a_counter++;
       } 
     }
@@ -355,10 +356,13 @@ void System::set_time(std::string time){
                 if (cp_s -> get_autoStart() + cp_s -> get_duration() > time){
                     break;
                 } else {
-                    std::cout << "[ ";
-                    current_time.print_time();
-                    std::cout << " ]";
-                    std::cout << "Il dispositivo " << cp_s -> get_name() << " si è spento" << std::endl;
+                    if (cp_s -> get_autoStart() != midnight){
+                        cp_s -> update_total_consumption(current_time);
+                        current_time = cp_s -> get_autoStart() + cp_s -> get_duration();
+                        std::cout << "[" << current_time << "] ";
+                        std::cout << "Il dispositivo " << cp_s -> get_name() << " si è spento" << std::endl;
+                        cp_s -> set("off");
+                    }
                     s_counter++;
                 }
             }
@@ -366,16 +370,19 @@ void System::set_time(std::string time){
                 if (m_s -> get_stop() > time){
                     break;
                 } else {
-                    std::cout << "[ ";
-                    current_time.print_time();
-                    std::cout << " ]";
-                    std::cout << "Il dispositivo " << m_s -> get_name() << " si è spento" << std::endl;
+                    if (m_s -> get_autoStart() != midnight){
+                        m_s -> update_total_consumption(current_time);
+                        current_time = m_s -> get_stop();
+                        std::cout << "[" << current_time << "] ";
+                        std::cout << "Il dispositivo " << m_s -> get_name() << " si è spento" << std::endl;
+                        m_s -> set("off");
+                    }
                     s_counter++;
                 }
             }
         }
     }
-    
+    std::cout << "Salto all'ora scelta: " << time << std::endl;
     current_time = time;
 }
 
@@ -447,27 +454,19 @@ void System::devices_sorting_off(std::vector<Device*>& v){
     });
 }
 
-bool System::compare_devices(Device* a, Device* b){
+bool System::compare_devices(Device* a, Device* b) {
     CP* cp_a = dynamic_cast<CP*>(a);
     CP* cp_b = dynamic_cast<CP*>(b);
     M* m_a = dynamic_cast<M*>(a);
     M* m_b = dynamic_cast<M*>(b);
+    
+    Stime time_a;
+    if (cp_a) time_a = cp_a->get_autoStart() + cp_a->get_duration();
+    if (m_a) time_a = m_a->get_stop();
 
-    if (cp_a && cp_b){
-        return (cp_a -> get_autoStart() + cp_a -> get_duration()) < (cp_b -> get_autoStart() + cp_b -> get_duration());
-    }
+    Stime time_b;
+    if (cp_b) time_b = cp_b->get_autoStart() + cp_b->get_duration();
+    if (m_b) time_b = m_b->get_stop();
 
-    if (m_a && m_b){
-        return m_a -> get_stop() < m_b -> get_stop();
-    }
-
-    if (m_a && cp_b){
-        return m_a -> get_stop() < (cp_b -> get_autoStart() + cp_b -> get_duration());
-    }
-
-    if (m_b && cp_a){
-        return m_b -> get_stop() < (cp_a -> get_autoStart() + cp_a -> get_duration());
-    }
-
-    return false;
+    return time_a < time_b;
 }
