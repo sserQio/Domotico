@@ -1,4 +1,14 @@
+// Castellini Camilla (2103044)
+
 #include "../include/device.h"
+#define BOLD    "\033[1m"
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN    "\033[36m"
 
 Device::Device(std::string n, int i, int c):
     name {n},
@@ -51,14 +61,14 @@ void Device::rm(){
 }
 
 void Device::show(){
-    if (name == "Impianto Fotovoltaico") std::cout << name << " produce: " << consumption << std::endl;
-    else std::cout << name << " consuma: " << consumption << std::endl;
+    if (name == "Impianto fotovoltaico") std::cout << name << " produce: " << GREEN << consumption << " Wh" << RESET << std::endl;
+    else std::cout << name << " consuma: " << RED << consumption << " Wh" << RESET << std::endl;
 }
 
-void Device::print(){
-    std::cout << "Nome: " << name << ", id: " << id << ", consumption: " << consumption << ", is_on " << is_on << ", ";
-    autoStart.print_time();
-}
+//void Device::print(){
+//    std::cout << "Nome: " << name << ", id: " << id << ", consumption: " << consumption << ", is_on " << is_on << ", ";
+//    std::cout << "["
+//}
 
 std::string Device::get_name(){
     return name;
@@ -80,8 +90,11 @@ int Device::get_total_consumption(){
     return total_consumption;
 }
 
-void Device::update_total_consumption(Stime t){
-    //t = t - autoStart;
-    //std::cout << "Il tempo t in update_total_consumption: " << t << std::endl;
-    //total_consumption += consumption * (t.get_hours() + ((double)t.get_minutes()/60));
+// Funzione scritta virtuale per non fare altri downcasting in modo che i CP e gli M salvati in oggetti Device
+// chiamino "la loro funzione update_total_consumption".
+// Per come era stato pensato il programma non è stato possibile porla virtuale pura
+void Device::update_total_consumption(Stime t){}
+
+void Device::reset_total_consumption(){
+    total_consumption = 0;
 }

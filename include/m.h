@@ -1,3 +1,5 @@
+// Petenazzo Sergio (2066693)
+
 #ifndef M_H
 #define M_H
 
@@ -12,12 +14,6 @@ class M : public Device{
         // Costruttore
         M(std::string n, int i, int c);
 
-        // Costruttore di copia
-        // M(const M& other);
-
-        // Operatore di assegnazione di copia
-        // M& operator=(const M& other);
-        
         // Override della funzione set
         void set(std::string command) override;
 
@@ -26,9 +22,6 @@ class M : public Device{
 
         // Override della funzione remove
         void rm() override;
-
-        // Override della funzione reset_timer
-        // void reset_timer() override;
 
         // Ritorna l'ora di spegnimento
         Stime get_stop();

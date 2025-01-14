@@ -1,0 +1,275 @@
+22:16 - sergio : ~/Desktop/Domotico 2/build > ./main
+Il sistema di gestione dei dispositivi elettrici è stato creato
+---------------------------------------------------------------
+I comandi disponibili sono i seguenti:
+set ${DEVICENAME} {on}
+set ${DEVICENAME} {off}
+set ${DEVICENAME} ${START} [${STOP}]
+rm ${DEVICENAME}
+show all
+show ${DEVICENAME}
+set time ${TIME}
+reset time
+reset timers
+reset all
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Impianto fotovoltaico} {on}
+[00:00] L'orario corrente è: [00:00]
+[00:00] Il dispositivo Impianto fotovoltaico si è acceso
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Impianto fotovoltaico} {07:00} {14:00}
+[00:00] L'orario corrente è: [00:00]
+
+[00:00] Impostato un timer per il dispositivo Impianto fotovoltaico dalle 07:00 alle: 14:00
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Scaldabagno} {on}
+[00:00] L'orario corrente è: [00:00]
+[00:00] Il dispositivo Scaldabagno si è acceso
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Scaldabagno} {07:00} {07:30}
+[00:00] L'orario corrente è: [00:00]
+
+[00:00] Impostato un timer per il dispositivo Scaldabagno dalle 07:00 alle: 07:30
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: rm {Scaldabagno}
+
+[00:00] L'orario corrente è: [00:00]
+[00:00] Rimosso il timer dal dispositivo Scaldabagno
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Scaldabagno} {on}
+[00:00] L'orario corrente è: [00:00]
+[00:00] Il dispositivo Scaldabagno si è acceso
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Scaldabagno} {06:45} {07:15}
+[00:00] L'orario corrente è: [00:00]
+
+[00:00] Impostato un timer per il dispositivo Scaldabagno dalle 06:45 alle: 07:15
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Televisore} {on}
+[00:00] L'orario corrente è: [00:00]
+[00:00] Il dispositivo Televisore si è acceso
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Televisore} {07:45}
+[00:00] Impostato un timer per il dispositivo Televisore dalle 07:45
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set time {08:00}
+[00:00] L'orario corrente è: [00:00]
+[06:45] Il dispositivo Scaldabagno si è acceso
+[07:00] Il dispositivo Impianto fotovoltaico si è acceso
+[07:15] Il dispositivo Scaldabagno si è spento
+[07:45] Il dispositivo Televisore si è acceso
+L'orario attuale è: [08:00]
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: show all
+
+[08:00] L'orario corrente è: [08:00]
+Il dispositivo Pompa di calore + termostato ha consumato: 0 Wh
+Il dispositivo Frigorifero ha consumato: 0 Wh
+Il dispositivo Lavatrice ha consumato: 0 Wh
+Il dispositivo Lavastoviglie ha consumato: 0 Wh
+Il dispositivo Tapparelle elettriche ha consumato: 0 Wh
+Il dispositivo Forno a microonde ha consumato: 0 Wh
+Il dispositivo Asciugatrice ha consumato: 0 Wh
+Il dispositivo Scaldabagno ha consumato: -500 Wh
+L'Impianto fotovoltaico produce: 1500 Wh
+Il dispositivo Televisore ha consumato: -50 Wh
+Attualmente il sistema ha prodotto 1500 Wh e consumato -550 Wh.
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: reset time
+
+[08:00] L'orario corrente è: [08:00]
+[00:00] Rimosso il timer dal dispositivo Impianto fotovoltaico
+[00:00] Rimosso il timer dal dispositivo Televisore
+L'orario attuale è: [00:00]
+Il sistema è stato riportato alle condizioni iniziali
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set time {15:00}
+[00:00] L'orario corrente è: [00:00]
+Non è stato acceso nessun dispositivo finora
+L'orario attuale è: [15:00]
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Tapparelle elettriche} {on}
+[15:00] L'orario corrente è: [15:00]
+[15:00] Il dispositivo Tapparelle elettriche si è acceso
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Lavastoviglie} {15:05}
+Il dispositivo è spento, prima è necessario accenderlo
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Lavastoviglie} {on}
+[15:00] L'orario corrente è: [15:00]
+[15:00] Il dispositivo Lavastoviglie si è acceso
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Lavastoviglie} {15:05}
+[15:00] Impostato un timer per il dispositivo Lavastoviglie dalle 15:05
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: show all 
+
+[15:00] L'orario corrente è: [15:00]
+Il dispositivo Pompa di calore + termostato ha consumato: 0 Wh
+Il dispositivo Frigorifero ha consumato: 0 Wh
+Il dispositivo Lavatrice ha consumato: 0 Wh
+Il dispositivo Lavastoviglie ha consumato: 125 Wh
+Il dispositivo Tapparelle elettriche ha consumato: 0 Wh
+Il dispositivo Forno a microonde ha consumato: 0 Wh
+Il dispositivo Asciugatrice ha consumato: 0 Wh
+Il dispositivo Scaldabagno ha consumato: 0 Wh
+L'Impianto fotovoltaico produce: 0 Wh
+Il dispositivo Televisore ha consumato: 0 Wh
+Attualmente il sistema ha prodotto 0 Wh e consumato -125 Wh.
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set time {20:00}
+[15:00] L'orario corrente è: [15:00]
+[15:05] Il dispositivo Lavastoviglie si è acceso
+[18:20] Il dispositivo Lavastoviglie si è spento
+L'orario attuale è: [20:00]
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y 
+Inserire il comando: reset all
+
+[20:00] L'orario corrente è: [20:00]
+[20:00] Il dispositivo Tapparelle elettriche è stato spento e il timer è stato azzerato a: [00:00]
+L'orario attuale è: [00:00]
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Televisore} {on}
+[00:00] L'orario corrente è: [00:00]
+[00:00] Il dispositivo Televisore si è acceso
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set time {22:00}
+[00:00] L'orario corrente è: [00:00]
+L'orario attuale è: [22:00]
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: show all
+
+[22:00] L'orario corrente è: [22:00]
+Il dispositivo Pompa di calore + termostato ha consumato: 0 Wh
+Il dispositivo Frigorifero ha consumato: 0 Wh
+Il dispositivo Lavatrice ha consumato: 0 Wh
+Il dispositivo Tapparelle elettriche ha consumato: 0 Wh
+Il dispositivo Forno a microonde ha consumato: 0 Wh
+Il dispositivo Asciugatrice ha consumato: 0 Wh
+Il dispositivo Scaldabagno ha consumato: 0 Wh
+L'Impianto fotovoltaico produce: 0 Wh
+Il dispositivo Televisore ha consumato: 0 Wh
+Il dispositivo Lavastoviglie ha consumato: 0 Wh
+Attualmente il sistema ha prodotto 0 Wh e consumato 0 Wh.
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+q
+Esco dall'esecuzione del programma...

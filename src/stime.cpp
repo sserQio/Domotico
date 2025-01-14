@@ -1,3 +1,5 @@
+// Barison Alessia (2103043)
+
 #include "../include/stime.h"
 
 Stime::Stime(){
@@ -14,10 +16,10 @@ Stime::Stime(std::string t){
     minutes = std::stoi(t.substr(3, 2));
 }
 
-void Stime::print_time(){
-    // Stampa l'ora corrente
-    std::cout << "[" << hours << ":" << minutes << "] " << std::endl;
-}
+//void Stime::print_time(){
+//    // Stampa l'ora corrente
+//    std::cout << "[" << hours << ":" << minutes << "] " << std::endl;
+//}
 
 void Stime::change_time(std::string h, std::string m){
     // Modifica l'ora con i valori passati come parametri

@@ -1,3 +1,5 @@
+// Castellini Camilla (2103044)
+
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
@@ -45,13 +47,13 @@ class System{
         // Rimuove tutti i timer ma i dispositivi mantengono il loro stato di accensione
         void reset_timers();
 
-        // - Sistema alle condizioni iniziali
+        // - Riporta il sistema alle condizioni iniziali
         // - Orario impostato a 00:00
-        // - Timer rimossi
+        // - Timer vengono rimossi
         // - Dispositivi spenti
         void reset_all();
 
-        // Algoritmo per ordinare in ordine crescente gli oggetti devices accesi in base al parametro autostart
+        // Algoritmo per ordinare in ordine crescente gli oggetti devices accesi in base al parametro autoStart
         void devices_sorting_on();
 
         // Algoritmo per ordinare in ordine crescente gli oggetti devices in base all'orario di spegnimento
@@ -60,8 +62,8 @@ class System{
         // Algoritmo per ordinare in ordine crescente gli oggetti device spenti
         bool compare_devices(Device* a, Device* b);
 
-        //
-        void add_device(Device* d);
+        // 
+        // void add_device(Device* d);
 
         // Ritorna il system_limit
         int get_system_limit();

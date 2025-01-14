@@ -1,3 +1,5 @@
+// Tutto il gruppo
+
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -29,7 +31,7 @@ void help(){
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
     std::cout << "rm ${DEVICENAME}" << std::endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
-    std::cout << "show" << std::endl;
+    std::cout << "show all" << std::endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
     std::cout << "show ${DEVICENAME}" << std::endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
@@ -44,19 +46,12 @@ void help(){
 }
 
 std::vector<std::string> readCommand(std::string in){
-    // Pattern per estrapolare i diversi argument dalla riga di comando
-    // std::regex pattern(
-    // R"((set|rm|show|set time|reset time|reset timers|reset all)\s+)"
-    // R"(\{(Impianto fotovoltaico|Pompa di calore \+ termostato|Scaldabagno|Frigorifero|Lavatrice|Lavastoviglie|Tapparelle elettriche|Forno a microonde|Asciugatrice|Televisore)\}\s*)"
-    // R"((\{(on|off|([01]\d|2[0-3]):[0-5]\d)\})?\s*)"
-    // R"((\{([01]\d|2[0-3]):[0-5]\d\})?)"
-    // );
-
+    
     std::regex pattern(
-        R"((set|rm|show|set time|reset time|reset timers|reset all|show all))"   // Comando principale
-        R"((?:\s+\{(Impianto fotovoltaico|Pompa di calore \+ termostato|Scaldabagno|Frigorifero|Lavatrice|Lavastoviglie|Tapparelle elettriche|Forno a microonde|Asciugatrice|Televisore)\})?)" // Secondo argomento opzionale
-        R"((\s+\{(on|off|(?:[01]\d|2[0-3]):[0-5]\d)\})?)"            // Terzo argomento opzionale
-        R"((?:\s+\{((?:[01]\d|2[0-3]):[0-5]\d)\})?)"                  // Quarto argomento opzionale
+        R"((set|rm|show|set time|reset time|reset timers|reset all|show all))"
+        R"((?:\s+\{(Impianto fotovoltaico|Pompa di calore \+ termostato|Scaldabagno|Frigorifero|Lavatrice|Lavastoviglie|Tapparelle elettriche|Forno a microonde|Asciugatrice|Televisore)\})?)"
+        R"((\s+\{(on|off|(?:[01]\d|2[0-3]):[0-5]\d)\})?)"
+        R"((?:\s+\{((?:[01]\d|2[0-3]):[0-5]\d)\})?)"
     );
 
     std::smatch match;
@@ -86,13 +81,13 @@ std::vector<std::string> readCommand(std::string in){
 }
 
 int main(){
-    // Creiamo un sistema casa che ospiterà i dispositivi
+    // Creiamo un sistema house che ospiterà i dispositivi
     System house{};
     double max_limit = house.get_system_limit();
     std::cout << BOLD << "Il sistema di gestione dei dispositivi elettrici è stato creato" << RESET << std::endl;
     std::cout << "---------------------------------------------------------------" << std::endl;
-    std::this_thread::sleep_for(std::chrono::milliseconds(1500));
-    // help(); // DA SCOMMENTARE DOPO DEBUGGING
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    help();
 
     while(true){
         bool start = true;
@@ -116,14 +111,13 @@ int main(){
                 break;
             } else std::cout << RED << "Il comando inserito non è valido, riprovare" << RESET << std::endl;
         }
-        if (!start) break; // Non esegue più il ciclo di riga 35
+        if (!start) break;
         else {
             std::string input;
             // Dichiariamo il vettore di stringhe per prendere il comando dell'utente
             std::vector<std::string> command;
-            std::cout << "Inserisci il comando: ";
+            std::cout << "Inserire il comando: ";
            
-            
             // Puliamo il buffer di std::cin
             std::cin.ignore();
             // Leggiamo l'intera riga in input
@@ -131,56 +125,41 @@ int main(){
             // Il vettore command riceve il comando già suddiviso
             command = readCommand(input);
             
-            
             Device* d = nullptr;
-            // CONTROLLARE CHE ORARI INSERITI SIANO VALIDI
-            std::cout << "Prima dello switch la grandezza del vettore è: " << command.size() << std::endl;
                 switch(command.size()){
-                /*case 1: {
-                    std::cout << "CASO 1" << std::endl;
-                    if (command[0] == "show") house.show();
-                    else if (command[0] == "reset time") {
-                        house.reset_time();
-                        std::cout << "Il sistema è stato riportato alle condizioni iniziali" << std::endl;
-                    } 
-                    else if (command[0] == "reset timers") house.reset_timers();
-                    else if (command[0] == "reset all") house.reset_all();
-                    break;
-                }*/
                 case 2: {
-                    std::cout << "CASO 2" << std::endl;
-                    for (int i = 0; i < command.size(); i++){
-                        std::cout << command[i] << ",";
-                    }
                     std::cout << std::endl;
-                    //EX CASO 1
-                    if (command[0] == "show all") { // tolto && command[1]==" "
-                        std::cout << "Entra correttamente in show" << std::endl;
+                    if (command[0] == "show all") {
+                        std::cout << "[" << house.current_time << "] " << "L'orario corrente è: [" << house.current_time << "]" << std::endl;
                         house.show_all();
                     }
                     else if (command[0] == "reset time") {
+                        std::cout << "[" << house.current_time << "] " << "L'orario corrente è: [" << house.current_time << "]" << std::endl;
                         house.reset_time();
                     } 
                     else if (command[0] == "reset timers") {
+                        std::cout << "[" << house.current_time << "] " << "L'orario corrente è: [" << house.current_time << "]" << std::endl;
                         house.reset_timers();
                     }
                     else if (command[0] == "reset all") {
+                        std::cout << "[" << house.current_time << "] " << "L'orario corrente è: [" << house.current_time << "]" << std::endl;
                         house.reset_all();
                     }
-                    //INIZIO VERI CASI 2
                     if (command[0] == "rm"){
+                        std::cout << "[" << house.current_time << "] " << "L'orario corrente è: [" << house.current_time << "]" << std::endl;
                         d = house.search_device(command[1]);
                         d -> rm();
-                        std::cout << YELLOW << "Il timer del dispositivo " << d -> get_name() << " è stato rimosso" << RESET << " , quindi ora è: " << d -> get_autoStart() << std::endl;
+                        std::cout << YELLOW << "[" << house.current_time << "] " << "Rimosso il timer dal dispositivo " << d -> get_name() << RESET << std::endl;
                     } else if (command[0] == "show"){
+                        std::cout << "[" << house.current_time << "] " << "L'orario corrente è: [" << house.current_time << "]" << std::endl;
                         d = house.search_device(command[1]);
                         d -> show();
-                    } //else if (command[0] == "set time") house.set_time(command[1]);
+                    }
                     break;
                 }
                 case 3: {
-                    std::cout << "CASO 3" << std::endl;
                     if (command[2] == "on" || command[2] == "off"){
+                        std::cout << "[" << house.current_time << "] " << "L'orario corrente è: [" << house.current_time << "]" << std::endl;
                         d = house.search_device(command[1]);
                         if (command[2] == "off"){
                             if (d -> get_is_on() == false) {
@@ -211,9 +190,8 @@ int main(){
                         break;
                     } 
                     if (command[0] == "set time") {
-                        std::cout << "command[2]: " << command[2] << std::endl;
+                        std::cout << "[" << house.current_time << "] " << "L'orario corrente è: [" << house.current_time << "]" << std::endl;
                         max_limit += house.set_time(command[2]);
-                        std::cout << "Per ora la capacità massima del sistema è: " << max_limit << std::endl;
                         break;
                     } else {
                         d = house.search_device(command[1]);
@@ -224,7 +202,7 @@ int main(){
                         }
                         if (d -> get_is_on() == true){
                             d -> set(command[2], "");
-                            std::cout << "[" << house.current_time << "] Il dispositivo " << d -> get_name() << " si accende alle: " << d -> get_autoStart() << std::endl;
+                            std::cout << "[" << house.current_time << "] Impostato un timer per il dispositivo " << d -> get_name() << " dalle " << GREEN << d -> get_autoStart() << RESET << std::endl;
                         } else {
                             std::cout << BLUE << "Il dispositivo è spento, prima è necessario accenderlo" << RESET << std::endl;
                         }
@@ -232,10 +210,7 @@ int main(){
                     }
                 }  
                 case 4: {
-                    std::cout << "CASO 4" << std::endl;
-                    for (int i = 0; i < command.size(); i++){
-                        std::cout << command[i] << ",";
-                    }
+                    std::cout << "[" << house.current_time << "] " << "L'orario corrente è: [" << house.current_time << "]" << std::endl;
                     std::cout << std::endl;
                     d = house.search_device(command[1]);
                     CP* cp_ptr = dynamic_cast<CP*>(d);
@@ -252,7 +227,7 @@ int main(){
                         }
                         else {
                             m_ptr -> set(command[2], command[3]);
-                            std::cout << "Il dispositivo " << m_ptr -> get_name() << " si " << GREEN << "accende " << RESET << "alle: " << m_ptr -> get_autoStart() << " e si " << RED << "spegne " << RESET << "alle: " << m_ptr -> get_stop() << std::endl;
+                            std::cout << "[" << house.current_time << "] " << "Impostato un timer per il dispositivo " << m_ptr -> get_name() << " dalle " << GREEN << m_ptr -> get_autoStart() << RESET << " alle: " << RED << m_ptr -> get_stop() << RESET << std::endl;
                         }
                     } else {
                         std::cout << BLUE << "Il dispositivo è spento, prima è necessario accenderlo" << RESET << std::endl;

@@ -1,3 +1,5 @@
+// Barison Alessia (2103043)
+
 #ifndef DEVICE_H
 #define DEVICE_H
 
@@ -49,19 +51,6 @@ class Device{
         // Mostra a schermo produzione/consumo energetico di un dispositivo specifico
         void show();
 
-        // Rimuove il timer di tutti i dispositivi. I dispositivi rimangono nello stato attuale
-        // virtual void reset_timer() = 0;
-
-        // Disabilita il costruttore di copia
-        // Device(const Device&) = delete;
-
-        // Disabilita l'operatore di assegnamento
-        // Device& operator=(const Device&) = delete;
-
-        // FUNZIONE PROVVISORIA
-        // Stampa tutte le variabili di un oggetto
-        void print();
-
         // Ritorna il nome del dispostivo
         std::string get_name();
 
@@ -79,6 +68,9 @@ class Device{
 
         // Aggiorna il valore di total_consumption in base a quanto ha consumato il dispositivo finora
         virtual void update_total_consumption(Stime t);
+
+        // Resetta i consumi totali
+        void reset_total_consumption();
 };
 
 #endif // DEVICE_H

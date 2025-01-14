@@ -1,0 +1,173 @@
+21:52 - sergio : ~/Desktop/Domotico 2/build > ./main
+Il sistema di gestione dei dispositivi elettrici è stato creato
+---------------------------------------------------------------
+I comandi disponibili sono i seguenti:
+set ${DEVICENAME} {on}
+set ${DEVICENAME} {off}
+set ${DEVICENAME} ${START} [${STOP}]
+rm ${DEVICENAME}
+show all
+show ${DEVICENAME}
+set time ${TIME}
+reset time
+reset timers
+reset all
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Frigorifero} {on}
+[00:00] L'orario corrente è: [00:00]
+[00:00] Il dispositivo Frigorifero si è acceso
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Lavatrice} {on}
+[00:00] L'orario corrente è: [00:00]
+[00:00] Il dispositivo Lavatrice si è acceso
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Frigorifero} {02:00} {04:00}
+[00:00] L'orario corrente è: [00:00]
+
+[00:00] Impostato un timer per il dispositivo Frigorifero dalle 02:00 alle: 04:00
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Lavatrice} {06:30}  
+[00:00] Impostato un timer per il dispositivo Lavatrice dalle 06:30
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: rm {Frigorifero}
+
+[00:00] L'orario corrente è: [00:00]
+Il timer del dispositivo Frigorifero è stato rimosso, quindi ora è: [00:00]
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Frigorifero} {on}
+[00:00] L'orario corrente è: [00:00]
+[00:00] Il dispositivo Frigorifero si è acceso
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Frigorifero} {05:00} {08:00}
+[00:00] L'orario corrente è: [00:00]
+
+[00:00] Impostato un timer per il dispositivo Frigorifero dalle 05:00 alle: 08:00
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: show {Frigorifero}
+
+[00:00] L'orario corrente è: [00:00]
+Frigorifero consuma: -400 Wh
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Impianto fotovoltaico} {on}
+[00:00] L'orario corrente è: [00:00]
+[00:00] Il dispositivo Impianto fotovoltaico si è acceso
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set {Impianto fotovoltaico} {10:00} {15:00}
+[00:00] L'orario corrente è: [00:00]
+
+[00:00] Impostato un timer per il dispositivo Impianto fotovoltaico dalle 10:00 alle: 15:00
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: set time {16:00}
+[00:00] L'orario corrente è: [00:00]
+[05:00] Il dispositivo Frigorifero si è acceso
+[06:30] Il dispositivo Lavatrice si è acceso
+[08:00] Il dispositivo Frigorifero si è spento
+[08:20] Il dispositivo Lavatrice si è spento
+[10:00] Il dispositivo Impianto fotovoltaico si è acceso
+[15:00] Il dispositivo Impianto fotovoltaico si è spento
+L'orario attuale è: [16:00]
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: show all
+
+[16:00] L'orario corrente è: [16:00]
+Il dispositivo Pompa di calore + termostato ha consumato: 0 Wh
+Il dispositivo Scaldabagno ha consumato: 0 Wh
+Il dispositivo Lavastoviglie ha consumato: 0 Wh
+Il dispositivo Tapparelle elettriche ha consumato: 0 Wh
+Il dispositivo Forno a microonde ha consumato: 0 Wh
+Il dispositivo Asciugatrice ha consumato: 0 Wh
+Il dispositivo Televisore ha consumato: 0 Wh
+Il dispositivo Frigorifero ha consumato: -1200 Wh
+Il dispositivo Lavatrice ha consumato: -2000 Wh
+L'Impianto fotovoltaico produce: 7500 Wh
+Attualmente il sistema ha prodotto 7500 Wh e consumato -3200 Wh.
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: reset all
+
+[16:00] L'orario corrente è: [16:00]
+L'orario attuale è: [00:00]
+---------------------------------------------------------------
+Vuoi procedere con la gestione dei dispositivi? [y]es
+Vuoi uscire dal programma? [q]uit
+Vuoi rileggere la lista dei comandi? [h]elp
+---------------------------------------------------------------
+y
+Inserire il comando: show all
+
+[00:00] L'orario corrente è: [00:00]
+Il dispositivo Pompa di calore + termostato ha consumato: 0 Wh
+Il dispositivo Scaldabagno ha consumato: 0 Wh
+Il dispositivo Lavastoviglie ha consumato: 0 Wh
+Il dispositivo Tapparelle elettriche ha consumato: 0 Wh
+Il dispositivo Forno a microonde ha consumato: 0 Wh
+Il dispositivo Asciugatrice ha consumato: 0 Wh
+Il dispositivo Televisore ha consumato: 0 Wh
+Il dispositivo Frigorifero ha consumato: 0 Wh
+Il dispositivo Lavatrice ha consumato: 0 Wh
+L'Impianto fotovoltaico produce: 0 Wh
+Attualmente il sistema ha prodotto 0 Wh e consumato 0 Wh.

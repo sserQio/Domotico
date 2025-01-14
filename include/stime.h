@@ -1,3 +1,5 @@
+// Petenazzo Sergio (2066693)
+
 #ifndef STIME_H
 #define STIME_H
 
@@ -19,10 +21,6 @@ class Stime{
 
         // Costruttore. Il parametro passato è una stringa che indica l'ora in formato hh:mm
         Stime(std::string t);
-
-        // Stampa l'orario corrente
-        // PROBLEMA: L'ora viene scritta come 0:0 e non 00:00
-        void print_time();
 
         // Modifica l'orario con uno a scelta
         void change_time(std::string h, std::string m);
