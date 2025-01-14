@@ -7,7 +7,7 @@
 #include "../include/stime.h"
 
 class Device{
-    private:
+    protected:
         // Nome del dispositivo
         std::string name;
 
@@ -23,7 +23,6 @@ class Device{
         // Variabile che tiene traccia del consumo totale di un dispositivo
         double total_consumption;
 
-    protected:
         // Orario di inizio di esecuzione automatico di un dispositivo
         // Questo parametro è comune a tutti i dispositivi, indipendentemente da M o CP
         Stime autoStart;
@@ -79,7 +78,7 @@ class Device{
         int get_total_consumption();
 
         // Aggiorna il valore di total_consumption in base a quanto ha consumato il dispositivo finora
-        void update_total_consumption(Stime t);
+        virtual void update_total_consumption(Stime t);
 };
 
 #endif // DEVICE_H

@@ -7,6 +7,10 @@
 #include "../include/m.h"
 #include "../include/cp.h"
 #include "../include/system.h"
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
 
 void help(){
     // Lista dei comandi stampati a distanza temporale per facilitare la lettura
@@ -86,7 +90,7 @@ int main(){
     std::cout << "Il sistema di gestione dei dispositivi elettrici è stato creato" << std::endl;
     std::cout << "---------------------------------------------------------------" << std::endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
-    // help(); DA SCOMMENTARE DOPO DEBUGGING
+    // help(); // DA SCOMMENTARE DOPO DEBUGGING
 
     while(true){
         bool start = true;
@@ -94,17 +98,17 @@ int main(){
             std::cout << "---------------------------------------------------------------" << std::endl;
             std::cout << "Vuoi procedere con la gestione dei dispositivi? [y]es" << std::endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            std::cout << "Vuoi uscire dal programma? 'exit'" << std::endl;
+            std::cout << "Vuoi uscire dal programma? [q]uit" << std::endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            std::cout << "Vuoi rileggere la lista dei comandi? 'help'" << std::endl;
+            std::cout << "Vuoi rileggere la lista dei comandi? [h]elp" << std::endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
             std::cout << "---------------------------------------------------------------" << std::endl;
 
             std::string input;
             std::cin >> input;
             if (input == "y" || input == "Y") break;
-            else if (input == "help" || input == "Help" || input == "HELP") help(); // FUNZIONE HELP
-            else if (input == "exit" || input == "Exit" || input == "EXIT"){
+            else if (input == "h" || input == "H") help(); // FUNZIONE HELP
+            else if (input == "q" || input == "Q"){
                 std::cout << "Esco dall'esecuzione del programma" << std::endl;
                 start = false;
                 break;
@@ -128,7 +132,7 @@ int main(){
             
             Device* d = nullptr;
             // CONTROLLARE CHE ORARI INSERITI SIANO VALIDI
-            std::cout<<"Prima dello switch la grandezza del vettore è: " << command.size() << std::endl;
+            std::cout << "Prima dello switch la grandezza del vettore è: " << command.size() << std::endl;
                 switch(command.size()){
                 /*case 1: {
                     std::cout << "CASO 1" << std::endl;
@@ -179,8 +183,8 @@ int main(){
                         if (command[2] == "off") d -> update_total_consumption(house.current_time);
                         d -> set(command[2]);
                         std::cout << "[" << house.current_time << "] Il dispositivo " << d -> get_name() << " si è ";
-                        if (command[2] == "on") std::cout << "acceso" << std::endl;
-                        else std::cout << "spento" << std::endl;
+                        if (command[2] == "on") std::cout << GREEN << "acceso" << RESET << std::endl;
+                        else std::cout << RED << "spento" << RESET << std::endl;
                         std::this_thread::sleep_for(std::chrono::milliseconds(1500));
                         break;
                     } 

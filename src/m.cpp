@@ -44,3 +44,9 @@ void M::rm(){
 Stime M::get_stop(){
     return stop;
 }
+
+void M::update_total_consumption(Stime t){
+    t = t - autoStart;
+    std::cout << "Il tempo t in update_total_consumption: " << t << std::endl;
+    total_consumption += consumption * (t.get_hours() + ((double)t.get_minutes()/60));
+}

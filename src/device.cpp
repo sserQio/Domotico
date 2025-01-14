@@ -81,6 +81,7 @@ int Device::get_total_consumption(){
 }
 
 void Device::update_total_consumption(Stime t){
-    t = t - autoStart;
-    total_consumption += consumption * (t.get_hours() + ((double)t.get_minutes()/60));
+    //t = t - autoStart;
+    //std::cout << "Il tempo t in update_total_consumption: " << t << std::endl;
+    //total_consumption += consumption * (t.get_hours() + ((double)t.get_minutes()/60));
 }

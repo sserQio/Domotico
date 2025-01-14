@@ -19,19 +19,22 @@ class M : public Device{
         // M& operator=(const M& other);
         
         // Override della funzione set
-        void set(std::string command); // tolto override
+        void set(std::string command) override;
 
         // Override della funzione set
-        void set(std::string start, std::string stop); // tolto override
+        void set(std::string start, std::string stop) override;
 
         // Override della funzione remove
-        void rm(); // tolto override
+        void rm() override;
 
         // Override della funzione reset_timer
         // void reset_timer() override;
 
         // Ritorna l'ora di spegnimento
         Stime get_stop();
+
+        // Override della funzione update_total_consumption
+        void update_total_consumption(Stime t) override;
 };
 
 #endif // M_H

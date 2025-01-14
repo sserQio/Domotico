@@ -44,3 +44,7 @@ void CP::reset_timer(){
 Stime CP::get_duration(){
     return cycle_duration;
 }
+
+void CP::update_total_consumption(Stime t){
+    total_consumption += consumption;
+}

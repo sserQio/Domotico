@@ -40,5 +40,8 @@ class CP : public Device{
 
         // Ritorna la durata del ciclo di esecuzione del dispositivo
         Stime get_duration();
+
+        // Override della funzoine update_total_consumption
+        void update_total_consumption(Stime t) override;
 };
 #endif // CP_H
