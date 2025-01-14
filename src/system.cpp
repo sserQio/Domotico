@@ -62,6 +62,10 @@ System::System() {
     devices.push_back(tv);
 }
 
+void System::add_device(Device* d){
+    devices_on.push_back(d);
+}
+
 Device* System::search_device(std::string device_name){
     Device* p = nullptr;
     for (int i = 0; i < devices.size(); i++){
@@ -93,21 +97,23 @@ void System::show_all(){
             XX = total_device_consumption;
             std::cout << "L'Impianto fotovoltaico " << GREEN << "produce: " << total_device_consumption << " Wh" << RESET << std::endl;
         } else {
-            std::cout << "Il dispositivo " << devices[i] -> get_name() << RED << " ha consumato: " << total_device_consumption << " Wh" << RESET << std::endl;
+            std::cout << "Il dispositivo " << devices[i] -> get_name() << " ha consumato: " << RED << total_device_consumption << " Wh" << RESET << std::endl;
             YY += total_device_consumption;
         }
     }
     std::cout << "Attualmente il sistema ha prodotto " << XX << " Wh e consumato " << YY << " Wh." << std::endl;
 }
 
-void System::set_time(std::string t){
+double System::set_time(std::string t){
     Stime time{t};
     // Vettore in cui mettiamo i dispositivi ordinati in ordine crescente di spegnimento
     std::vector<Device*> d_off;
+    // Produzione elettrica dell'impianto fotovoltaico
+    double pv_production = 0;
     // Non si può (ancora :O) tornare indietro nel tempo
     if (time < current_time){
         std::cout << RED << "Errore: non puoi tornare indietro nel tempo!" << RESET << std::endl;
-        return;
+        return pv_production;
     }
 
     // Facciamo un bool che ci controlla che ci sia almeno un dispositivo che è stato acceso
@@ -123,7 +129,7 @@ void System::set_time(std::string t){
         std::cout << "Non è stato acceso nessun dispositivo finora" << std::endl;
         current_time = time;
         std::cout << "L'orario corrente è: [" << current_time << "]" << std::endl;
-        return;
+        return pv_production;
     } 
     
     devices_sorting_on();
@@ -175,7 +181,7 @@ void System::set_time(std::string t){
                     break;
                 } else {
                     if (cp_s -> get_autoStart() != midnight){
-                        current_time = cp_s -> get_autoStart() + cp_s -> get_duration(); // --- NUOVA MODIFICA ---
+                        current_time = cp_s -> get_autoStart() + cp_s -> get_duration();
                         cp_s -> update_total_consumption(current_time);
                         std::cout << "[" << current_time << "] ";
                         std::cout << "Il dispositivo " << cp_s -> get_name() << " si è " << RED << "spento" << RESET << std::endl;
@@ -189,6 +195,11 @@ void System::set_time(std::string t){
                     break;
                 } else {
                     if (m_s -> get_autoStart() != midnight){
+                        // Calcoliamo la produzione dell'impianto fotovoltaico
+                        if (m_s -> get_name() == "Impianto fotovoltaico"){
+                            Stime duration = m_s -> get_stop() - m_s -> get_autoStart();
+                            pv_production = (duration.get_hours() + ((double)duration.get_minutes()/60)) * m_s -> get_consumption();
+                        }
                         current_time = m_s -> get_stop(); // --- NUOVA MODIFICA ---
                         m_s -> update_total_consumption(current_time);
                         std::cout << "[" << current_time << "] ";
@@ -207,28 +218,25 @@ void System::set_time(std::string t){
             cp_a = dynamic_cast<CP*>(devices[a_counter]);
             m_a = dynamic_cast<M*>(devices[a_counter]);
             if (cp_a){
-                if (cp_a -> get_autoStart() + cp_a -> get_duration() > time){
+                if (cp_a -> get_autoStart() > time){
                     break;
                 } else {
                     if (cp_a -> get_autoStart() != midnight){
-                        current_time = cp_a -> get_autoStart() + cp_a -> get_duration(); // --- NUOVA MODIFICA ---
-                        cp_a -> update_total_consumption(current_time);
+                        current_time = cp_a -> get_autoStart();
                         std::cout << "[" << current_time << "] ";
-                        std::cout << "Il dispositivo " << cp_a -> get_name() << " si è " << RED << "spento" << RESET << std::endl;
-                        cp_a -> set("off");
+                        std::cout << "Il dispositivo " << cp_a -> get_name() << " si è " << GREEN << "acceso" << RESET << std::endl;
                     }
                     a_counter++;
                 }
             }
             if (m_a){
-                if (m_a -> get_stop() > time){
+                if (m_a -> get_autoStart() > time){
                     break;
                 } else {
                     if (m_a -> get_autoStart() != midnight){
-                        current_time = m_a -> get_stop(); // --- NUOVA MODIFICA ---
-                        m_a -> update_total_consumption(current_time);
+                        current_time = m_a -> get_autoStart();
                         std::cout << "[" << current_time << "] ";
-                        std::cout << "Il dispositivo " << m_a -> get_name() << " si è " << RED << "spento" << RESET << std::endl;
+                        std::cout << "Il dispositivo " << m_a -> get_name() << " si è " << GREEN << "acceso" << RESET << std::endl;
                         m_a -> set("off");
                     }
                     a_counter++;
@@ -283,6 +291,11 @@ void System::set_time(std::string t){
                 } else {
                     if (m_s -> get_stop() > time) break;
                     if (m_s -> get_autoStart() != midnight){
+                        // Calcoliamo la produzione dell'impianto fotovoltaico
+                        if (m_s -> get_name() == "Impianto fotovoltaico"){
+                            Stime duration = m_s -> get_stop() - m_s -> get_autoStart();
+                            pv_production = (duration.get_hours() + ((double)duration.get_minutes()/60)) * m_s -> get_consumption();
+                        }
                         current_time = m_s -> get_stop();
                         m_s -> update_total_consumption(current_time);
                         std::cout << "[" << current_time << "] ";
@@ -306,6 +319,11 @@ void System::set_time(std::string t){
                 } else {
                     if (m_s -> get_stop() > time) break;
                     if (m_s -> get_autoStart() != midnight){
+                        // Calcoliamo la produzione dell'impianto fotovoltaico
+                        if (m_s -> get_name() == "Impianto fotovoltaico"){
+                            Stime duration = m_s -> get_stop() - m_s -> get_autoStart();
+                            pv_production = (duration.get_hours() + ((double)duration.get_minutes()/60)) * m_s -> get_consumption();
+                        }
                         current_time = m_s -> get_stop();
                         m_s -> update_total_consumption(current_time);
                         std::cout << "[" << current_time << "] ";
@@ -355,7 +373,7 @@ void System::set_time(std::string t){
     }
 
     // Abbiamno finito di scorrere le accensioni, quindi a_counter = devices.size()
-    // Scorriamo tutto ilo vettore di spegnimento
+    // Scorriamo tutto il vettore di spegnimento
     if (a_counter == devices.size()){
         while (s_counter < d_off.size()){
             cp_s = dynamic_cast<CP*>(d_off[s_counter]);
@@ -379,6 +397,11 @@ void System::set_time(std::string t){
                     break;
                 } else {
                     if (m_s -> get_autoStart() != midnight){
+                        // Calcoliamo la produzione dell'impianto fotovoltaico
+                        if (m_s -> get_name() == "Impianto fotovoltaico"){
+                            Stime duration = m_s -> get_stop() - m_s -> get_autoStart();
+                            pv_production = (duration.get_hours() + ((double)duration.get_minutes()/60)) * m_s -> get_consumption();
+                        }
                         current_time = m_s -> get_stop();
                         m_s -> update_total_consumption(current_time);
                         std::cout << "[" << current_time << "] ";
@@ -392,6 +415,7 @@ void System::set_time(std::string t){
     }
     std::cout << "Salto all'ora scelta: " << time << std::endl;
     current_time = time;
+    return pv_production;
 }
 
 void System::reset_time(){
@@ -477,4 +501,8 @@ bool System::compare_devices(Device* a, Device* b) {
     if (m_b) time_b = m_b->get_stop();
 
     return time_a < time_b;
+}
+
+int System::get_system_limit(){
+    return system_limit;
 }

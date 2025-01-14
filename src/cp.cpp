@@ -48,3 +48,8 @@ Stime CP::get_duration(){
 void CP::update_total_consumption(Stime t){
     total_consumption += consumption;
 }
+
+void CP::set_total_consumption(Stime t){
+    t = t - autoStart;
+    total_consumption += consumption * (t.get_hours() + ((double)t.get_minutes()/60));
+}

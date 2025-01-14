@@ -62,9 +62,6 @@ std::vector<std::string> readCommand(std::string in){
     std::smatch match;
     std::vector<std::string> result;
 
-
-
-
     std::string trimmedInput = std::regex_replace(in, std::regex(R"(^\s+|\s+$)"), "");
 
     // Match dell'input con il pattern
@@ -91,6 +88,7 @@ std::vector<std::string> readCommand(std::string in){
 int main(){
     // Creiamo un sistema casa che ospiterà i dispositivi
     System house{};
+    double max_limit = house.get_system_limit();
     std::cout << BOLD << "Il sistema di gestione dei dispositivi elettrici è stato creato" << RESET << std::endl;
     std::cout << "---------------------------------------------------------------" << std::endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
@@ -113,10 +111,10 @@ int main(){
             if (input == "y" || input == "Y") break;
             else if (input == "h" || input == "H") help(); // FUNZIONE HELP
             else if (input == "q" || input == "Q"){
-                std::cout << "Esco dall'esecuzione del programma" << std::endl;
+                std::cout << "Esco dall'esecuzione del programma..." << std::endl;
                 start = false;
                 break;
-            } else std::cout << "Il comando inserito non è valido, riprovare" << std::endl;
+            } else std::cout << RED << "Il comando inserito non è valido, riprovare" << RESET << std::endl;
         }
         if (!start) break; // Non esegue più il ciclo di riga 35
         else {
@@ -184,7 +182,27 @@ int main(){
                     std::cout << "CASO 3" << std::endl;
                     if (command[2] == "on" || command[2] == "off"){
                         d = house.search_device(command[1]);
-                        if (command[2] == "off") d -> update_total_consumption(house.current_time);
+                        if (command[2] == "off"){
+                            if (d -> get_is_on() == false) {
+                                std::cout << YELLOW << "Il dispositivo era già spento" << RESET << std::endl;
+                                break;
+                            }
+                            CP* cp_ptr = dynamic_cast<CP*>(d);
+                            Stime app = cp_ptr -> get_autoStart() + cp_ptr -> get_duration();
+                            if (cp_ptr && app < house.current_time){
+                                cp_ptr -> set_total_consumption(house.current_time); 
+                            } else {
+                                d -> update_total_consumption(house.current_time);
+                                // Condizione per evitare che venga contata più volte la produzione dell'impianto fotovoltaico 
+                                if (d -> get_name() == "Impianto fotovoltaico"){
+                                    // app riceve la durata della produzione dell'Impianto fotovoltaico
+                                    app = house.current_time - d -> get_autoStart();
+                                    // Aggiornamento di max_limit in seguito alla produzione del Pannello fotovoltaico
+                                    max_limit += (d -> get_consumption() * (app.get_hours() + ((double)app.get_minutes()/60)));
+                                }
+                            }
+                           
+                        }
                         d -> set(command[2]);
                         std::cout << "[" << house.current_time << "] Il dispositivo " << d -> get_name() << " si è ";
                         if (command[2] == "on") std::cout << GREEN << "acceso" << RESET << std::endl;
@@ -194,7 +212,8 @@ int main(){
                     } 
                     if (command[0] == "set time") {
                         std::cout << "command[2]: " << command[2] << std::endl;
-                        house.set_time(command[2]);
+                        max_limit += house.set_time(command[2]);
+                        std::cout << "Per ora la capacità massima del sistema è: " << max_limit << std::endl;
                         break;
                     } else {
                         d = house.search_device(command[1]);
@@ -241,7 +260,7 @@ int main(){
                     break;
                 }
                 default: {
-                    std::cout << RED << "Comando sbagliato, riprova:" << RESET << std::endl;
+                    std::cout << RED << "Il comando inserito non è valido, riprovare" << RESET << std::endl;
                     break;
                 }
             } 

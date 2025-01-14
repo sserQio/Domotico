@@ -11,9 +11,9 @@ class System{
         // Limite della rete elettrica (non considerando l'impianto fotovoltaico)
         const int system_limit = 3500;
 
-        // Produzione elettrica dell'impianto fotovoltaico
-        int pv_production = 0;
-
+        // Vettore di dispositivi accesi necessario per la politica di rimpiazzo in caso di sovraccarico
+        std::vector<Device*> devices_on;
+ 
     public:
         // Costruttore
         System();
@@ -37,7 +37,7 @@ class System{
         void show_all();
 
         // Salta a una specifica ora del giorno
-        void set_time(std::string t);
+        double set_time(std::string t);
 
         // Porta l'orario del sistema a 00:00 e riporta i dispositivi alle condizioni iniziali
         void reset_time();
@@ -59,6 +59,12 @@ class System{
 
         // Algoritmo per ordinare in ordine crescente gli oggetti device spenti
         bool compare_devices(Device* a, Device* b);
+
+        //
+        void add_device(Device* d);
+
+        // Ritorna il system_limit
+        int get_system_limit();
 };
 
 #endif // SYSTEM_H

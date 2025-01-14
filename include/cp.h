@@ -43,5 +43,8 @@ class CP : public Device{
 
         // Override della funzoine update_total_consumption
         void update_total_consumption(Stime t) override;
+
+        // Aggiora il consumo totale nel caso in cui un dispositivo CP non abbia finito il ciclo
+        void set_total_consumption(Stime t);
 };
 #endif // CP_H
