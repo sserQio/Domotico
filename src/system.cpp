@@ -3,6 +3,14 @@
 #include <thread>
 #include <chrono>
 #include <algorithm>
+#define BOLD    "\033[1m"
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN    "\033[36m"
 
 std::vector<Device*> devices;
 
@@ -83,9 +91,9 @@ void System::show_all(){
         
         if (devices[i] -> get_name() == "Impianto fotovoltaico"){
             XX = total_device_consumption;
-            std::cout << "L'Impianto fotovoltaico produce: " << total_device_consumption << std::endl;
+            std::cout << "L'Impianto fotovoltaico " << GREEN << "produce: " << total_device_consumption << " Wh" << RESET << std::endl;
         } else {
-            std::cout << "Il dispositivo " << devices[i] -> get_name() << " ha consumato: " << total_device_consumption << " Wh" << std::endl;
+            std::cout << "Il dispositivo " << devices[i] -> get_name() << RED << " ha consumato: " << total_device_consumption << " Wh" << RESET << std::endl;
             YY += total_device_consumption;
         }
     }
@@ -98,7 +106,7 @@ void System::set_time(std::string t){
     std::vector<Device*> d_off;
     // Non si può (ancora :O) tornare indietro nel tempo
     if (time < current_time){
-        std::cout << "Non puoi tornare indietro nel tempo!" << std::endl;
+        std::cout << RED << "Errore: non puoi tornare indietro nel tempo!" << RESET << std::endl;
         return;
     }
 
@@ -170,7 +178,7 @@ void System::set_time(std::string t){
                         current_time = cp_s -> get_autoStart() + cp_s -> get_duration(); // --- NUOVA MODIFICA ---
                         cp_s -> update_total_consumption(current_time);
                         std::cout << "[" << current_time << "] ";
-                        std::cout << "Il dispositivo " << cp_s -> get_name() << " si è spento" << std::endl;
+                        std::cout << "Il dispositivo " << cp_s -> get_name() << " si è " << RED << "spento" << RESET << std::endl;
                         cp_s -> set("off");
                     }
                     s_counter++;
@@ -184,7 +192,7 @@ void System::set_time(std::string t){
                         current_time = m_s -> get_stop(); // --- NUOVA MODIFICA ---
                         m_s -> update_total_consumption(current_time);
                         std::cout << "[" << current_time << "] ";
-                        std::cout << "Il dispositivo " << m_s -> get_name() << " si è spento" << std::endl;
+                        std::cout << "Il dispositivo " << m_s -> get_name() << " si è " << RED << "spento" << RESET << std::endl;
                         m_s -> set("off");
                     }
                     s_counter++;
@@ -206,7 +214,7 @@ void System::set_time(std::string t){
                         current_time = cp_a -> get_autoStart() + cp_a -> get_duration(); // --- NUOVA MODIFICA ---
                         cp_a -> update_total_consumption(current_time);
                         std::cout << "[" << current_time << "] ";
-                        std::cout << "Il dispositivo " << cp_a -> get_name() << " si è spento" << std::endl;
+                        std::cout << "Il dispositivo " << cp_a -> get_name() << " si è " << RED << "spento" << RESET << std::endl;
                         cp_a -> set("off");
                     }
                     a_counter++;
@@ -220,7 +228,7 @@ void System::set_time(std::string t){
                         current_time = m_a -> get_stop(); // --- NUOVA MODIFICA ---
                         m_a -> update_total_consumption(current_time);
                         std::cout << "[" << current_time << "] ";
-                        std::cout << "Il dispositivo " << m_a -> get_name() << " si è spento" << std::endl;
+                        std::cout << "Il dispositivo " << m_a -> get_name() << " si è " << RED << "spento" << RESET << std::endl;
                         m_a -> set("off");
                     }
                     a_counter++;
@@ -244,7 +252,7 @@ void System::set_time(std::string t){
                     if (cp_a -> get_autoStart() != midnight){
                         current_time = cp_a -> get_autoStart();
                         std::cout << "[" << current_time << "] ";
-                        std::cout << "Il dispositivo " << cp_a -> get_name() << " si è acceso" << std::endl;
+                        std::cout << "Il dispositivo " << cp_a -> get_name() << " si è " << GREEN << "acceso" << RESET << std::endl;
                     }
                     a_counter++;
                 } else {
@@ -255,7 +263,7 @@ void System::set_time(std::string t){
                         current_time = cp_s -> get_autoStart() + cp_s -> get_duration();
                         cp_s -> update_total_consumption(current_time);
                         std::cout << "[" << current_time << "] ";
-                        std::cout << "Il dispositivo " << cp_s -> get_name() << " si è spento" << std::endl;
+                        std::cout << "Il dispositivo " << cp_s -> get_name() << " si è " << RED << "spento" << RESET << std::endl;
                         cp_s -> set("off");
                     }
                     s_counter++;
@@ -269,7 +277,7 @@ void System::set_time(std::string t){
                     if (cp_a -> get_autoStart() != midnight){
                         current_time = cp_a -> get_autoStart();
                         std::cout << "[" << current_time << "] ";
-                        std::cout << "Il dispositivo " << cp_a -> get_name() << " si è acceso" << std::endl;
+                        std::cout << "Il dispositivo " << cp_a -> get_name() << " si è " << GREEN << "acceso" << RESET << std::endl;
                     }
                     a_counter++;
                 } else {
@@ -278,7 +286,7 @@ void System::set_time(std::string t){
                         current_time = m_s -> get_stop();
                         m_s -> update_total_consumption(current_time);
                         std::cout << "[" << current_time << "] ";
-                        std::cout << "Il dispositivo " << m_s -> get_name() << " si è spento" << std::endl;
+                        std::cout << "Il dispositivo " << m_s -> get_name() << " si è " << RED << "spento" << RESET << std::endl;
                         m_s -> set("off");
                     }
                     s_counter++;
@@ -292,7 +300,7 @@ void System::set_time(std::string t){
                     if (m_a -> get_autoStart() != midnight){
                         current_time = m_a -> get_autoStart();
                         std::cout << "[" << current_time << "] ";
-                        std::cout << "Il dispositivo " << m_a -> get_name() << " si è acceso" << std::endl;
+                        std::cout << "Il dispositivo " << m_a -> get_name() << " si è " << GREEN << "acceso" << RESET << std::endl;
                     }
                     a_counter++;
                 } else {
@@ -301,7 +309,7 @@ void System::set_time(std::string t){
                         current_time = m_s -> get_stop();
                         m_s -> update_total_consumption(current_time);
                         std::cout << "[" << current_time << "] ";
-                        std::cout << "Il dispositivo " << m_s -> get_name() << " si è spento" << std::endl;
+                        std::cout << "Il dispositivo " << m_s -> get_name() << " si è " << RED << "spento" << RESET << std::endl;
                         m_s -> set("off");
                     }
                     s_counter++;
@@ -315,7 +323,7 @@ void System::set_time(std::string t){
                     if (m_a -> get_autoStart() != midnight){
                         current_time = m_a -> get_autoStart();
                         std::cout << "[" << current_time << "] ";
-                        std::cout << "Il dispositivo " << m_a -> get_name() << " si è acceso" << std::endl;
+                        std::cout << "Il dispositivo " << m_a -> get_name() << " si è " << GREEN << "acceso" << RESET << std::endl;
                     }
                     a_counter++;
                 } else {
@@ -324,7 +332,7 @@ void System::set_time(std::string t){
                         current_time = cp_s -> get_autoStart() + cp_s -> get_duration();
                         cp_s -> update_total_consumption(current_time);
                         std::cout << "[" << current_time << "] ";
-                        std::cout << "Il dispositivo " << cp_s -> get_name() << " si è spento" << std::endl;
+                        std::cout << "Il dispositivo " << cp_s -> get_name() << " si è " << RED << "spento" << RESET << std::endl;
                         cp_s -> set("off");
                     }
                     s_counter++;
@@ -340,7 +348,7 @@ void System::set_time(std::string t){
         if (devices[a_counter] -> get_autoStart() != midnight){
             current_time = devices[a_counter] -> get_autoStart();
             std::cout << "[" << current_time << "] ";
-            std::cout << "Il dispositivo " << devices[a_counter] -> get_name() << " si è acceso" << std::endl;
+            std::cout << "Il dispositivo " << devices[a_counter] -> get_name() << " si è " << GREEN << "acceso" << RESET << std::endl;
         }
         a_counter++;
       } 
@@ -360,7 +368,7 @@ void System::set_time(std::string t){
                         current_time = cp_s -> get_autoStart() + cp_s -> get_duration();
                         cp_s -> update_total_consumption(current_time);
                         std::cout << "[" << current_time << "] ";
-                        std::cout << "Il dispositivo " << cp_s -> get_name() << " si è spento" << std::endl;
+                        std::cout << "Il dispositivo " << cp_s -> get_name() << " si è " << RED << "spento" << RESET << std::endl;
                         cp_s -> set("off");
                     }
                     s_counter++;
@@ -374,7 +382,7 @@ void System::set_time(std::string t){
                         current_time = m_s -> get_stop();
                         m_s -> update_total_consumption(current_time);
                         std::cout << "[" << current_time << "] ";
-                        std::cout << "Il dispositivo " << m_s -> get_name() << " si è spento" << std::endl;
+                        std::cout << "Il dispositivo " << m_s -> get_name() << " si è " << RED << "spento" << RESET << std::endl;
                         m_s -> set("off");
                     }
                     s_counter++;
@@ -409,7 +417,7 @@ void System::reset_timers(){
     for (int i = 0; i < devices.size(); i++){
         if (devices[i] -> get_is_on() == true){
             devices[i] -> rm();
-            std::cout << "[" << current_time << "] Il dispositivo " << devices[i] -> get_name() << " è acceso";
+            std::cout << "[" << current_time << "] Il dispositivo " << devices[i] -> get_name() << " è " << GREEN << "acceso" << RESET;
             std::cout << " e il timer è stato azzerato a: " << devices[i] -> get_autoStart() << std::endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
         }   
@@ -424,14 +432,14 @@ void System::reset_all(){
         if (m_ptr){
             if (m_ptr -> get_is_on() == true){
                 m_ptr -> set("off");
-                std::cout << "[" << current_time << "] Il dispositivo " << m_ptr -> get_name() << " è stato spento";
+                std::cout << "[" << current_time << "] Il dispositivo " << m_ptr -> get_name() << " è stato " << RED << "spento" << RESET;
                 std::cout << " e il timer è stato azzerato a: " << m_ptr -> get_autoStart() << std::endl;
                 std::this_thread::sleep_for(std::chrono::milliseconds(500));
             }
         } else {
             if (cp_ptr -> get_is_on() == true) {
                 cp_ptr -> set("off");
-                std::cout << "[" << current_time << "] Il dispositivo " << cp_ptr -> get_name() << " è stato spento";
+                std::cout << "[" << current_time << "] Il dispositivo " << cp_ptr -> get_name() << " è stato " << RED << "spento" << RESET;
                 std::cout << " e il timer è stato azzerato a: " << cp_ptr -> get_autoStart() << std::endl;
                 std::this_thread::sleep_for(std::chrono::milliseconds(500));
             }

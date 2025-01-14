@@ -7,10 +7,14 @@
 #include "../include/m.h"
 #include "../include/cp.h"
 #include "../include/system.h"
+#define BOLD    "\033[1m"
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
 #define GREEN   "\033[32m"
 #define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN    "\033[36m"
 
 void help(){
     // Lista dei comandi stampati a distanza temporale per facilitare la lettura
@@ -87,7 +91,7 @@ std::vector<std::string> readCommand(std::string in){
 int main(){
     // Creiamo un sistema casa che ospiterà i dispositivi
     System house{};
-    std::cout << "Il sistema di gestione dei dispositivi elettrici è stato creato" << std::endl;
+    std::cout << BOLD << "Il sistema di gestione dei dispositivi elettrici è stato creato" << RESET << std::endl;
     std::cout << "---------------------------------------------------------------" << std::endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
     // help(); // DA SCOMMENTARE DOPO DEBUGGING
@@ -96,11 +100,11 @@ int main(){
         bool start = true;
         while(true){
             std::cout << "---------------------------------------------------------------" << std::endl;
-            std::cout << "Vuoi procedere con la gestione dei dispositivi? [y]es" << std::endl;
+            std::cout << "Vuoi procedere con la gestione dei dispositivi?" BOLD << " [y]es" << RESET << std::endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            std::cout << "Vuoi uscire dal programma? [q]uit" << std::endl;
+            std::cout << "Vuoi uscire dal programma?" BOLD << " [q]uit" RESET << std::endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            std::cout << "Vuoi rileggere la lista dei comandi? [h]elp" << std::endl;
+            std::cout << "Vuoi rileggere la lista dei comandi?" << BOLD << " [h]elp" << RESET << std::endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
             std::cout << "---------------------------------------------------------------" << std::endl;
 
@@ -169,7 +173,7 @@ int main(){
                     if (command[0] == "rm"){
                         d = house.search_device(command[1]);
                         d -> rm();
-                        std::cout << "Il timer del dispositivo " << d -> get_name() << " è stato rimosso, quindi ora è: " << d -> get_autoStart() << std::endl;
+                        std::cout << YELLOW << "Il timer del dispositivo " << d -> get_name() << " è stato rimosso" << RESET << " , quindi ora è: " << d -> get_autoStart() << std::endl;
                     } else if (command[0] == "show"){
                         d = house.search_device(command[1]);
                         d -> show();
@@ -196,14 +200,14 @@ int main(){
                         d = house.search_device(command[1]);
                         M* m_ptr = dynamic_cast<M*>(d);
                         if (m_ptr){
-                            std::cout << "Errore! Non puoi assegnare solo un orario per un dispositivo di tipo M" << std::endl;
+                            std::cout << RED << "Errore! Non puoi assegnare solo un orario per un dispositivo di tipo M" << RESET << std::endl;
                             break;
                         }
                         if (d -> get_is_on() == true){
                             d -> set(command[2], "");
                             std::cout << "[" << house.current_time << "] Il dispositivo " << d -> get_name() << " si accende alle: " << d -> get_autoStart() << std::endl;
                         } else {
-                            std::cout << "Il dispositivo è spento, prima è necessario accenderlo" << std::endl;
+                            std::cout << BLUE << "Il dispositivo è spento, prima è necessario accenderlo" << RESET << std::endl;
                         }
                         break;
                     }
@@ -217,7 +221,7 @@ int main(){
                     d = house.search_device(command[1]);
                     CP* cp_ptr = dynamic_cast<CP*>(d);
                     if (cp_ptr){
-                        std::cout << "Errore! Non puoi assegnare un orario di spegnimento per un dispositivo di tipo CP" << std::endl;
+                        std::cout << RED << "Errore: non puoi assegnare un orario di spegnimento per un dispositivo di tipo CP" << RESET << std::endl;
                         break;
                     }
                     M* m_ptr = dynamic_cast<M*>(d);
@@ -225,19 +229,19 @@ int main(){
                         Stime first = command[2];
                         Stime second = command[3];
                         if (second < first) {
-                            std::cout << "Gli orari inseriti non sono corretti" << std::endl;
+                            std::cout << RED << "Errore: gli orari inseriti non sono corretti" << RESET << std::endl;
                         }
                         else {
                             m_ptr -> set(command[2], command[3]);
-                            std::cout << "Il dispositivo " << m_ptr -> get_name() << " si accende alle: " << m_ptr -> get_autoStart() << " e si spegne alle: " << m_ptr -> get_stop() << std::endl;
+                            std::cout << "Il dispositivo " << m_ptr -> get_name() << " si " << GREEN << "accende " << RESET << "alle: " << m_ptr -> get_autoStart() << " e si " << RED << "spegne " << RESET << "alle: " << m_ptr -> get_stop() << std::endl;
                         }
                     } else {
-                        std::cout << "Il dispositivo è spento, prima è necessario accenderlo" << std::endl;
+                        std::cout << BLUE << "Il dispositivo è spento, prima è necessario accenderlo" << RESET << std::endl;
                     }
                     break;
                 }
                 default: {
-                    std::cout << "Comando sbagliato, riprova:" << std::endl;
+                    std::cout << RED << "Comando sbagliato, riprova:" << RESET << std::endl;
                     break;
                 }
             } 
